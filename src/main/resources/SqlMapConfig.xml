@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+
+    <properties resource="jdbc.properties"/>
+
+    <!--配置别名-->
+    <typeAliases>
+        <typeAlias type="io.oicp.yorick61c.domain.EbUser" alias="user"/>
+    </typeAliases>
+
+    <!--分页助手插件配置在mapper, environment之前-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <!--指定方言，不同的数据库限制每页条数语句不同-->
+            <property name="dialect" value="mysql"/>
+        </plugin>
+    </plugins>
+    <!--数据源环境-->
+    <!--<environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>-->
+
+
+    <!--加载映射文件-->
+    <mappers>
+        <!--<mapper resource="io.oicp.yorick61c/mapper/UserMapper.xml"/>-->
+        <package name="io.oicp.yorick61c"/>
+    </mappers>
+
+
+</configuration>
