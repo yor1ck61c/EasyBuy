@@ -5,8 +5,10 @@ import io.oicp.yorick61c.domain.EbUser;
 import io.oicp.yorick61c.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 
 
 @Controller
@@ -19,10 +21,9 @@ public class UserController {
 
 
     @RequestMapping("/register")
-    public String userRegister(EbUser user){
+    public String userRegister(EbUser user) throws IOException {
         service.register(user);
-
-        return null;
+        return "redirect:/reg-result.jsp";
     }
 
 

@@ -1,38 +1,37 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-		 pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=gbk" pageEncoding="gbk"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gbk" />
-<title>æ˜“ä¹°ç½‘ - é¦–é¡µ</title>
+<title>Ò×ÂòÍø - Ê×Ò³</title>
 <link type="text/css" rel="stylesheet" href="css/style.css" />
 <script type="text/javascript" src="scripts/function.js"></script>
 </head>
 <body>
 <div id="header" class="wrap">
 	<div id="logo"><img src="images/logo.gif" /></div>
-	<div class="help"><a href="#" class="shopping">è´­ç‰©è½¦</a><a href="login.html">ç™»å½•</a><a href="register.html">æ³¨å†Œ</a><a href="guestbook.html">ç•™è¨€</a></div>
+	<div class="help"><a href="#" class="shopping">¹ºÎï³µ</a><a href="login.html">µÇÂ¼</a><a href="register.html">×¢²á</a><a href="guestbook.html">ÁôÑÔ</a></div>
 	<div class="navbar">
 		<ul class="clearfix">
-			<li class="current"><a href="#">é¦–é¡µ</a></li>
-			<li><a href="#">å›¾ä¹¦</a></li>
-			<li><a href="#">ç™¾è´§</a></li>
-			<li><a href="#">å“ç‰Œ</a></li>
-			<li><a href="#">ä¿ƒé”€</a></li>
+			<li class="current"><a href="#">Ê×Ò³</a></li>
+			<li><a href="#">Í¼Êé</a></li>
+			<li><a href="#">°Ù»õ</a></li>
+			<li><a href="#">Æ·ÅÆ</a></li>
+			<li><a href="#">´ÙÏú</a></li>
 		</ul>
 	</div>
 </div>
 <div id="childNav">
 	<div class="wrap">
 		<ul class="clearfix">
-			<li class="first"><a href="#">éŸ³ä¹</a></li>
-			<li><a href="#">å½±è§†</a></li>
-			<li><a href="#">å°‘å„¿</a></li>
-			<li><a href="#">åŠ¨æ¼«</a></li>
-			<li><a href="#">å°è¯´</a></li>
-			<li><a href="#">å¤–è¯­</a></li>
-			<li><a href="#">æ•°ç ç›¸æœº</a></li>
-			<li><a href="#">ç¬”è®°æœ¬</a></li>
+			<li class="first"><a href="#">ÒôÀÖ</a></li>
+			<li><a href="#">Ó°ÊÓ</a></li>
+			<li><a href="#">ÉÙ¶ù</a></li>
+			<li><a href="#">¶¯Âþ</a></li>
+			<li><a href="#">Ð¡Ëµ</a></li>
+			<li><a href="#">ÍâÓï</a></li>
+			<li><a href="#">ÊýÂëÏà»ú</a></li>
+			<li><a href="#">±Ê¼Ç±¾</a></li>
 			<li class="last"><a href="#">Investor Relations</a></li>
 		</ul>
 	</div>
@@ -42,70 +41,70 @@
 		<em class="corner lb"></em>
 		<em class="corner rt"></em>
 		<div class="box">
-			<h1>æ¬¢è¿Žæ³¨å†Œæ˜“ä¹°ç½‘</h1>
+			<h1>»¶Ó­×¢²áÒ×ÂòÍø</h1>
 			<ul class="steps clearfix">
-				<li class="current"><em></em>å¡«å†™æ³¨å†Œä¿¡æ¯</li>
-				<li class="last"><em></em>æ³¨å†ŒæˆåŠŸ</li>
+				<li class="current"><em></em>ÌîÐ´×¢²áÐÅÏ¢</li>
+				<li class="last"><em></em>×¢²á³É¹¦</li>
 			</ul>
 			<form id="regForm" method="post" action="${pageContext.request.contextPath}/user/register" onsubmit="return checkForm(this);">
 				<table>
 					<tr>
-						<td class="field">ç”¨æˆ·å(*)ï¼š</td>
+						<td class="field">ÓÃ»§Ãû(*)£º</td>
 						<td><input class="text" type="text" name="euUserId" onfocus="FocusItem(this)" onblur="doAjax(this,'servlet/CheckUserNameAction?userName='+this.value);" /><span></span></td>
 					</tr>
                     <tr>
-						<td class="field">çœŸå®žå§“å(*)ï¼š</td>
+						<td class="field">ÕæÊµÐÕÃû(*)£º</td>
 						<td><input class="text" type="text" name="euUserName" onfocus="FocusItem(this)" onblur="CheckItem(this);" /><span></span></td>
 					</tr>
 					<tr>
-						<td class="field">ç™»å½•å¯†ç (*)ï¼š</td>
+						<td class="field">µÇÂ¼ÃÜÂë(*)£º</td>
 						<td><input class="text" type="password" id="euPassword" name="euPassword" onfocus="FocusItem(this)" onblur="CheckItem(this);" /><span></span></td>
 					</tr>
 					<tr>
-						<td class="field">ç¡®è®¤å¯†ç (*)ï¼š</td>
+						<td class="field">È·ÈÏÃÜÂë(*)£º</td>
 						<td><input class="text" type="password" name="rePassWord" onfocus="FocusItem(this)" onblur="CheckItem(this);" /><span></span></td>
 					</tr>
 					<tr>
-						<td class="field">æ€§åˆ«(*)ï¼š</td>
-						<td><input type="radio" name="euSex" checked="checked" value="T"/>ç”·
-						<input type="radio" name="euSex" value="F"/>å¥³<span></span></td>
+						<td class="field">ÐÔ±ð(*)£º</td>
+						<td><input type="radio" name="euSex" checked="checked" value="T"/>ÄÐ
+						<input type="radio" name="euSex" value="F"/>Å®<span></span></td>
 					</tr>
 					<tr>
-						<td class="field">å‡ºç”Ÿæ—¥æœŸï¼š</td>
+						<td class="field">³öÉúÈÕÆÚ£º</td>
 						<td>
 							<select name="birthyear">
 								<option value="2000">2000</option>
 								<option value="1999" selected="selected">1999</option>
-							</select>å¹´
+							</select>Äê
 							<select name="birthmonth">
 								<option value="12">12</option>
 								<option value="11" selected="selected">11</option>
-							</select>æœˆ
+							</select>ÔÂ
 							<select name="birthday">
 								<option value="2">2</option>
 								<option value="1" selected="selected">1</option>
-							</select>æ—¥
+							</select>ÈÕ
 						</td>
 					</tr>
                     <tr>
-						<td class="field">èº«ä»½è¯ï¼š</td>
+						<td class="field">Éí·ÝÖ¤£º</td>
 						<td><input class="text" type="text" name="euIdentityCode" onfocus="FocusItem(this)" onblur="CheckItem(this);"/><span></span></td>
 					</tr>
 					<tr>
-						<td class="field">ç”µå­é‚®ä»¶ï¼š</td>
+						<td class="field">µç×ÓÓÊ¼þ£º</td>
 						<td><input class="text" type="text" name="euEmail" onfocus="FocusItem(this)" onblur="CheckItem(this);"/><span></span></td>
 					</tr>
                     <tr>
-						<td class="field">æ‰‹æœºï¼š</td>
+						<td class="field">ÊÖ»ú£º</td>
 						<td><input class="text" type="text" name="euMobile" onfocus="FocusItem(this)" onblur="CheckItem(this);" /><span></span></td>
 					</tr>
 					<tr>
-						<td class="field">åœ°å€(*)ï¼š</td>
+						<td class="field">µØÖ·(*)£º</td>
 						<td><input class="text" type="text" name="euAddress" onfocus="FocusItem(this)" onblur="CheckItem(this);" /><span></span></td>
 					</tr>
 					<tr>
 						<td></td>
-						<td><label class="ui-green"><input type="submit" name="submit" value="æäº¤æ³¨å†Œ" /></label></td>
+						<td><label class="ui-green"><input type="submit" name="submit" value="Ìá½»×¢²á" /></label></td>
 					</tr>
 				</table>
 			</form>
@@ -114,7 +113,7 @@
 	<div class="clear"></div>
 </div>
 <div id="footer">
-	Copyright &copy; 2016 æ¹–å—è½¯æµ‹ä¿¡æ¯æŠ€æœ¯æœ‰é™å…¬å¸ All Rights Reserved. æ¹˜ICPè¯1001å·
+	Copyright &copy; 2016 ºþÄÏÈí²âÐÅÏ¢¼¼ÊõÓÐÏÞ¹«Ë¾ All Rights Reserved. ÏæICPÖ¤1001ºÅ
 </div>
 </body>
 </html>

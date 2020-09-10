@@ -21,7 +21,7 @@
         </plugin>
     </plugins>
     <!--数据源环境-->
-    <!--<environments default="development">
+    <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
@@ -31,13 +31,14 @@
                 <property name="password" value="${jdbc.password}"/>
             </dataSource>
         </environment>
-    </environments>-->
+    </environments>
 
 
     <!--加载映射文件-->
     <mappers>
-        <!--<mapper resource="io.oicp.yorick61c/mapper/UserMapper.xml"/>-->
-        <package name="io.oicp.yorick61c"/>
+        <mapper resource="io.oicp.yorick61c.mapper/UserMapper.xml"/>
+
+        <!--<package name="io.oicp.yorick61c.mapper"/>-->
     </mappers>
 
 
