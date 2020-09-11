@@ -1,5 +1,6 @@
 package io.oicp.yorick61c.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -45,6 +46,10 @@ public class EbUser implements Serializable {
      * @mbggenerated
      */
     @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(
+            pattern = "yyyy-MM-dd",
+            timezone = "GMT+8"
+    )
     private Date euBirthday;
 
     /**

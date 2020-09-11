@@ -1,3 +1,4 @@
+document.charset='utf-8'
 function Delete(url)
 {
 	if(confirm("È·¶¨É¾³ýÂð")){

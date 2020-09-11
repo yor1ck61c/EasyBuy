@@ -41,8 +41,13 @@ public class TestConnection {
         SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("SqlMapConfig.xml"));
         UserMapper mapper = sessionFactory.openSession(true).getMapper(UserMapper.class);
 
-        List<EbUser> all = mapper.findAll();
-        System.out.println(all);
+        EbUser ebUser = new EbUser();
+        ebUser.setEuUserId("test5");
+        ebUser.setEuUserName("吴彦祖");
+        ebUser.setEuSex("T");
+        ebUser.setEuPassword("test123");
+        ebUser.setEuAddress("test地址");
+        mapper.register(ebUser);
         /*System.out.println(userMapper);*/
         /*List<EbUser> all = userMapper.findAll();
         System.out.println(all);*/

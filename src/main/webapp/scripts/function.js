@@ -1,5 +1,5 @@
 // JavaScript Document
-
+document.charset='utf-8'
 function createXMLHttpRequest(){
 	var xmlhttp;
 	try{
@@ -42,7 +42,7 @@ function createXMLHttpRequest(){
 	return xmlhttp;
 }*/
 
-//ÖØĞ´×Ö·û´®µÄtrim()º¯Êı
+//ï¿½ï¿½Ğ´ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½trim()ï¿½ï¿½ï¿½ï¿½
 String.prototype.trim = function() {
 	  var m = this.match(/^\s*(\S+(\s+\S+)*)\s*$/);
 	  return (m == null) ? "" : m[1];
@@ -66,8 +66,8 @@ function doAjax(obj,url){
 				if(obj!=null){
 					spanObj.className = "error";
 					spanObj.innerHTML = ajaxRequest.responseText.trim();
-					if(ajaxRequest.responseText.trim()=="¸ÃÓÃ»§ÃûÒÑ¾­×¢²á"){
-						obj.onfocus = null;	//½ûÓÃ»ñÈ¡½¹µãÊÂ¼ş
+					if(ajaxRequest.responseText.trim()=="è¯¥ç”¨æˆ·åå·²ç»æ³¨å†Œ"){
+						obj.onfocus = null;	//ç¦ç”¨è·å–ç„¦ç‚¹äº‹ä»¶
 						obj.select();
 					}
 				}	
@@ -91,53 +91,53 @@ function CheckItem(obj)
 	switch(obj.name) {
 		case "euUserId":
 			if(obj.value == "") {
-				msgBox.innerHTML = "ÓÃ»§Ãû²»ÄÜÎª¿Õ";
+				msgBox.innerHTML = "ç”¨æˆ·åä¸èƒ½ä¸ºç©º";
 				msgBox.className = "error";
 				return false;
 			}
 			break;
 		case "euPassword":
 			if(obj.value == "") {
-				msgBox.innerHTML = "ÃÜÂë²»ÄÜÎª¿Õ";
+				msgBox.innerHTML = "å¯†ç ä¸èƒ½ä¸ºç©º";
 				msgBox.className = "error";
 				return false;
 			}
 			break;
 		case "rePassWord":
 			if(obj.value == "") {
-				msgBox.innerHTML = "È·ÈÏÃÜÂë²»ÄÜÎª¿Õ";
+				msgBox.innerHTML = "ç¡®è®¤å¯†ç ä¸èƒ½ä¸ºç©º";
 				msgBox.className = "error";
 				return false;
 			} else if(obj.value != document.getElementById("euPassword").value) {
-				msgBox.innerHTML = "Á½´ÎÊäÈëµÄÃÜÂë²»ÏàÍ¬";
+				msgBox.innerHTML = "ä¸¤æ¬¡è¾“å…¥çš„å¯†ç ä¸ç›¸åŒ";
 				msgBox.className = "error";
 				return false;
 			}
 			break;
 		case "euAddress":
 			if(obj.value == "") {
-				msgBox.innerHTML = "ÓÊ¼ÄµØÖ·²»ÄÜÎª¿Õ";
+				msgBox.innerHTML = "é‚®å¯„åœ°å€ä¸èƒ½ä¸ºç©º";
 				msgBox.className = "error";
 				return false;
 			}
 			break;
 		case "euUserName":
 			if(obj.value == "") {
-				msgBox.innerHTML = "ÕæÊµĞÕÃû²»ÄÜÎª¿Õ";
+				msgBox.innerHTML = "çœŸå®å§“åä¸èƒ½ä¸ºç©º";
 				msgBox.className = "error";
 				return false;
 			}
 			break;
 		case "guestName":
 			if(obj.value == "") {
-				msgBox.innerHTML = "êÇ³Æ²»ÄÜÎª¿Õ";
+				msgBox.innerHTML = "æ˜µç§°ä¸èƒ½ä¸ºç©º";
 				msgBox.className = "error";
 				return false;
 			}
 			break;
 		case "guestContent":
 			if(obj.value == "") {
-				msgBox.innerHTML = "ÁôÑÔÄÚÈİ²»ÄÜÎª¿Õ";
+				msgBox.innerHTML = "ç•™è¨€å†…å®¹ä¸èƒ½ä¸ºç©º";
 				msgBox.className = "error";
 				return false;
 			}	
@@ -167,22 +167,22 @@ function reloadPrice(id, status,stock)
 	if(status==true) {
 		number.value++;		
 		if(number.value>stock){
-			alert("Ä¿Ç°¿â´æ²»×ã(Ê£Óà"+stock+"¼ş)£¬Çë·µ»ØĞŞ¸Ä¿â´æÊıÁ¿!");
-			priceBox.innerHTML = "£¤" + price * number.value;
+			alert("ç›®å‰åº“å­˜ä¸è¶³(å‰©ä½™"+stock+"ä»¶)ï¼Œè¯·è¿”å›ä¿®æ”¹åº“å­˜æ•°é‡!");
+			priceBox.innerHTML = "ï¿¥" + price * number.value;
 			number.value = stock;
 			number.select();
 			return false;
 		}
 	} else if(status==false){
 		if(number.value == 1) {
-			priceBox.innerHTML = "£¤" + price * number.value;
+			priceBox.innerHTML = "ï¿¥" + price * number.value;
 			return false;
 		} else {
 			number.value--;			
 		}
 	}
 
-	priceBox.innerHTML = "£¤" + price * number.value;
+	priceBox.innerHTML = "ï¿¥" + price * number.value;
 	doAjax(null,"servlet/ChangeNumsAction?rnd="+Math.random()+"&ep_id="+id+"&newNums="+number.value);
 	
 }

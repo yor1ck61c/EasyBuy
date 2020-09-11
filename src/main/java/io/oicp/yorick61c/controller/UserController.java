@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.util.Date;
 
 
 @Controller
@@ -19,9 +20,14 @@ public class UserController {
     private UserService service;
 
 
+    @RequestMapping("/test")
+    public void test(){
+        System.out.println("Test");
+    }
 
     @RequestMapping("/register")
     public String userRegister(EbUser user) throws IOException {
+
         service.register(user);
         return "redirect:/reg-result.jsp";
     }
