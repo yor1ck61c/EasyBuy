@@ -1,5 +1,7 @@
 package io.oicp.yorick61c.test;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import io.oicp.yorick61c.domain.EbUser;
 import io.oicp.yorick61c.mapper.UserMapper;
 import org.apache.ibatis.io.Resources;
@@ -73,5 +75,17 @@ public class TestConnection {
     public void test3(){
         EbUser userByUP = userMapper.findUserByUP("qwe", "qwe");
         System.out.println(userByUP);
+    }
+
+    @Test
+    public void test5() throws IOException {
+        PageHelper.startPage(1,5);
+
+        List<EbUser> users = userMapper.findAll();
+
+        for (EbUser user: users) {
+            System.out.println(user.toString());
+        }
+
     }
 }
