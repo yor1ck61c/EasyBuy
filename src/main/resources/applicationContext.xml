@@ -8,6 +8,8 @@
                 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
                 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+
+
     <context:component-scan base-package="io.oicp.yorick61c">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
@@ -20,29 +22,27 @@
         <property name="password" value="${jdbc.password}"/>
     </bean>
 
+    <!--sqlSessionFactoryBean:sqlSession工厂-->
+    <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:SqlMapConfig.xml"/>
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <property name="typeAliasesPackage" value="io.oicp.yorick61c.domain"/>
+    </bean>
+
+    <!--mapper接口文件，mapper扫描方式扫描-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="io.oicp.yorick61c.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryBean"/>
+    </bean>
+
     <bean id="template" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <!--&lt;!&ndash;配置sessionFactory&ndash;&gt;
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="configLocation" value="classpath:SqlMapConfig.xml"/>
-    </bean>
-
-
-
-    &lt;!&ndash;扫描mapper所在的包，为mapper创造实现类&ndash;&gt;
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="io.oicp.yorick61c.mapper"/>
-
-    </bean>-->
-
-
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
-
     </bean>
     <!--开启注解事务-->
     <tx:annotation-driven transaction-manager="transactionManager"/>

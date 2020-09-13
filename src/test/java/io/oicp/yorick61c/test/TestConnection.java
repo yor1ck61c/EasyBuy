@@ -14,20 +14,37 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+@RunWith(SpringJUnit4ClassRunner.class)
+//导入spring的配置文件
+@ContextConfiguration("classpath:spring-mvc.xml")
 public class TestConnection {
 
     @Resource(name = "userMapper")
     private UserMapper userMapper;
 
+    /*SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("SqlMapConfig.xml"));
+    UserMapper mapper = sessionFactory.openSession(true).getMapper(UserMapper.class);*/
+
+    public TestConnection() throws IOException {
+    }
+
+
+    @Test
+    public void test4() throws IOException {
+        List<EbUser> all = userMapper.findAll();
+        System.out.println(all+"qq");
+    }
+
 
     @Test
     public void test1(){
-
         ApplicationContext app = new ClassPathXmlApplicationContext("applicationContext.xml");
         JdbcTemplate template = (JdbcTemplate) app.getBean("template");
         String sql = "select * from eb_user";
@@ -38,8 +55,7 @@ public class TestConnection {
     @Test
     public void test2() throws IOException {
 
-        SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("SqlMapConfig.xml"));
-        UserMapper mapper = sessionFactory.openSession(true).getMapper(UserMapper.class);
+
 
         EbUser ebUser = new EbUser();
         ebUser.setEuUserId("test5");
@@ -47,9 +63,15 @@ public class TestConnection {
         ebUser.setEuSex("T");
         ebUser.setEuPassword("test123");
         ebUser.setEuAddress("test地址");
-        mapper.register(ebUser);
+        userMapper.register(ebUser);
         /*System.out.println(userMapper);*/
         /*List<EbUser> all = userMapper.findAll();
         System.out.println(all);*/
+    }
+
+    @Test
+    public void test3(){
+        EbUser userByUP = userMapper.findUserByUP("qwe", "qwe");
+        System.out.println(userByUP);
     }
 }

@@ -6,5 +6,8 @@ import java.io.IOException;
 
 public interface UserService {
 
+
     void register(EbUser user) throws IOException;
+
+    EbUser loginCheck(EbUser user);
 }

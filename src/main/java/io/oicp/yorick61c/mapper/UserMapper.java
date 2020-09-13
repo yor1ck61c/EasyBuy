@@ -11,4 +11,8 @@ public interface UserMapper {
     void register(EbUser user);
 
     List<EbUser> findAll() throws IOException;
+
+    EbUser findUserByUP(String username, String password);
+
+    EbUser findUserByUP(EbUser user);
 }
