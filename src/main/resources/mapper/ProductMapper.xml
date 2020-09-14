@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.oicp.yorick61c.mapper.ProductMapper">
+
+    <sql id="productColumn">
+        ep_id,ep_name,ep_description,ep_price,ep_stock,epc_id,epc_child_id,ep_file_name
+    </sql>
+
+    <resultMap id="productMap" type="ebProduct">
+        <id property="epId" column="ep_id"/>
+        <result property="epName" column="ep_name"/>
+        <result property="epDescription" column="ep_description"/>
+        <result property="epPrice" column="ep_price"/>
+        <result property="epStock" column="ep_stock"/>
+        <result property="epcId" column="epc_id"/>
+        <result property="epcChildId" column="epc_child_id"/>
+        <result property="epFileName" column="ep_file_name"/>
+    </resultMap>
+
+    <!--增-->
+    <insert id="insert" parameterType="ebProduct">
+        insert into eb_product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                ep_id,
+            <if test="epName != null">
+                ep_name,
+            </if>
+            <if test="epDescription != null">
+                ep_description,
+            </if>
+            <if test="epPrice != null">
+                ep_price,
+            </if>
+            <if test="epStock != null">
+                ep_stock,
+            </if>
+            <if test="epcId != null">
+                epc_id,
+            </if>
+            <if test="epcChildId != null">
+                epc_child_id,
+            </if>
+            <if test="epFileName != null">
+                ep_file_name,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            null,
+            <if test="epName != null">
+                #{epName},
+            </if>
+            <if test="epDescription != null">
+                #{epDescription},
+            </if>
+            <if test="epPrice != null">
+                #{epPrice},
+            </if>
+            <if test="epStock != null">
+                #{epStock},
+            </if>
+            <if test="epcId != null">
+                #{epcId},
+            </if>
+            <if test="epcChildId != null">
+                #{epcChildId},
+            </if>
+            <if test="epFileName != null">
+                #{epFileName}
+            </if>
+        </trim>
+    </insert>
+
+    <!--删-->
+    <delete id="delete" parameterType="ebProduct">
+        delete from eb_product
+        <where>
+            <if test="epId != null">
+                and ep_id = #{epId}
+            </if>
+            <if test="epName != null">
+                and ep_name = #{epName}
+            </if>
+            <if test="epDescription != null">
+                and ep_description = #{epDescription}
+            </if>
+            <if test="epPrice != null">
+                and ep_price = #{epPrice}
+            </if>
+            <if test="epStock != null">
+                and ep_stock = #{epStock}
+            </if>
+            <if test="epcId != null">
+                and epc_id = #{epcId}
+            </if>
+            <if test="epcChildId != null">
+                and epc_child_id = #{epcChildId}
+            </if>
+            <if test="epFileName != null">
+                and ep_file_name = #{epFileName}
+            </if>
+        </where>
+    </delete>
+
+    <!--改-->
+    <update id="update" parameterType="ebProduct">
+        update eb_product set
+        <trim suffixOverrides=",">
+            <if test="epName != null">
+                ep_name = #{epName},
+            </if>
+            <if test="epName != null">
+                ep_description = #{epDescription},
+            </if>
+            <if test="epName != null">
+                ep_price = #{epPrice},
+            </if>
+            <if test="epName != null">
+                ep_stock = #{epStock},
+            </if>
+            <if test="epName != null">
+                epc_id = #{epcId},
+            </if>
+            <if test="epName != null">
+                epc_child_id = #{epcChildId},
+            </if>
+            <if test="epName != null">
+                ep_file_name = #{epFileName},
+            </if>
+        </trim>
+        where ep_id = #{epId}
+    </update>
+
+    <!--查-->
+    <select id="findAll" resultMap="productMap">
+        select <include refid="productColumn"/> from eb_product
+    </select>
+
+    <select id="findProduct" parameterType="ebProduct" resultMap="productMap">
+        select <include refid="productColumn"/> from eb_product
+        <where>
+            <if test="epId != null">
+                and ep_id = #{epId}
+            </if>
+            <if test="epName != null">
+                and ep_name = #{epName}
+            </if>
+            <if test="epDescription != null">
+                and ep_description = #{epDescription}
+            </if>
+            <if test="epPrice != null">
+                and ep_price = #{epPrice}
+            </if>
+            <if test="epStock != null">
+                and ep_stock = #{epStock}
+            </if>
+            <if test="epcId != null">
+                and epc_id = #{epcId}
+            </if>
+            <if test="epcChildId != null">
+                and epc_child_id = #{epcChildId}
+            </if>
+            <if test="epFileName != null">
+                and ep_file_name = #{epFileName}
+            </if>
+        </where>
+    </select>
+
+</mapper>

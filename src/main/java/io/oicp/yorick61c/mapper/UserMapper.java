@@ -1,6 +1,7 @@
 package io.oicp.yorick61c.mapper;
 
 import io.oicp.yorick61c.domain.EbUser;
+import org.apache.ibatis.annotations.Param;
 
 import java.io.IOException;
 import java.util.List;
@@ -8,11 +9,13 @@ import java.util.List;
 
 public interface UserMapper {
 
-    void register(EbUser user);
+    void insert(EbUser user);
+
+    void deleteUserById(String id);;
 
     List<EbUser> findAll() throws IOException;
 
-    EbUser findUserByUP(String username, String password);
+    void updateUserById(EbUser user);
 
-    EbUser findUserByUP(EbUser user);
+    EbUser findUser(EbUser user);
 }

@@ -1,6 +1,5 @@
 package io.oicp.yorick61c.test;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import io.oicp.yorick61c.domain.EbOrderDetail;
 import io.oicp.yorick61c.domain.EbProductCategory;
@@ -8,14 +7,8 @@ import io.oicp.yorick61c.domain.EbUser;
 import io.oicp.yorick61c.mapper.OrderDetailMapper;
 import io.oicp.yorick61c.mapper.ProductCategoryMapper;
 import io.oicp.yorick61c.mapper.UserMapper;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -25,7 +18,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 //导入spring的配置文件
@@ -50,8 +42,13 @@ public class TestConnection {
 
     @Test
     public void test4() throws IOException {
+        PageHelper.startPage(1,1);
         List<EbUser> all = userMapper.findAll();
-        System.out.println(all+"qq");
+        EbUser user = all.get(0);
+
+        EbUser user1 = userMapper.findUser(user);
+
+        System.out.println(user1.toString());
     }
 
 
@@ -66,26 +63,9 @@ public class TestConnection {
     }
     @Test
     public void test2() throws IOException {
-
-
-
-        EbUser ebUser = new EbUser();
-        ebUser.setEuUserId("test5");
-        ebUser.setEuUserName("吴彦祖");
-        ebUser.setEuSex("T");
-        ebUser.setEuPassword("test123");
-        ebUser.setEuAddress("test地址");
-        userMapper.register(ebUser);
-        /*System.out.println(userMapper);*/
-        /*List<EbUser> all = userMapper.findAll();
-        System.out.println(all);*/
+        userMapper.deleteUserById("test4");
     }
 
-    @Test
-    public void test3(){
-        EbUser userByUP = userMapper.findUserByUP("qwe", "qwe");
-        System.out.println(userByUP);
-    }
 
     @Test
     public void test5() throws IOException {

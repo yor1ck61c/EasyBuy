@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.oicp.yorick61c.mapper.UserMapper">
+
+    <resultMap id="userMap" type="ebUser">
+        <id property="euUserId" column="EU_USER_ID"/>
+        <result property="euUserName" column="EU_USER_NAME"/>
+        <result property="euPassword" column="EU_PASSWORD"/>
+        <result property="euSex" column="EU_SEX"/>
+        <result property="euBirthday" column="EU_BIRTHDAY"/>
+        <result property="euIdentityCode" column="EU_IDENTITY_CODE"/>
+        <result property="euEmail" column="EU_EMAIL"/>
+        <result property="euMobile" column="EU_MOBILE"/>
+        <result property="euAddress" column="EU_ADDRESS"/>
+        <result property="euStatus" column="EU_STATUS"/>
+    </resultMap>
+    <!--sql抽取-->
+    <sql id="userColumn">EU_USER_ID,EU_USER_NAME,EU_PASSWORD,EU_SEX,EU_BIRTHDAY,EU_IDENTITY_CODE,EU_EMAIL,EU_MOBILE,EU_ADDRESS,EU_STATUS</sql>
+
+    <!--增-->
+    <insert id="insert" parameterType="ebUser">
+        insert into eb_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="euUserId != null">
+                EU_USER_ID,
+            </if>
+            <if test="euUserName != null">
+                EU_USER_NAME,
+            </if>
+            <if test="euPassword != null">
+                EU_PASSWORD,
+            </if>
+            <if test="euSex != null">
+                EU_SEX,
+            </if>
+            <if test="euBirthday != null">
+                EU_BIRTHDAY,
+            </if>
+            <if test="euIdentityCode != null">
+                EU_IDENTITY_CODE,
+            </if>
+            <if test="euEmail != null">
+                EU_EMAIL,
+            </if>
+            <if test="euMobile != null">
+                EU_MOBILE,
+            </if>
+            <if test="euAddress != null">
+                EU_ADDRESS,
+            </if>
+            <if test="euStatus != null">
+                EU_STATUS,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="euUserId != null">
+                #{euUserId},
+            </if>
+            <if test="euUserName != null">
+                #{euUserName},
+            </if>
+            <if test="euPassword != null">
+                #{euPassword},
+            </if>
+            <if test="euSex != null">
+                #{euSex},
+            </if>
+            <if test="euBirthday != null">
+                #{euBirthday},
+            </if>
+            <if test="euIdentityCode != null">
+                #{euIdentityCode},
+            </if>
+            <if test="euEmail != null">
+                #{euEmail},
+            </if>
+            <if test="euMobile != null">
+                #{euMobile},
+            </if>
+            <if test="euAddress != null">
+                #{euAddress},
+            </if>
+            <if test="euStatus != null">
+                #{euStatus}
+            </if>
+        </trim>
+
+    </insert>
+    <!--删-->
+
+    <delete id="deleteUserById" parameterType="string">
+        delete from eb_user where EU_USER_ID = #{id}
+    </delete>
+    <!--改-->
+    <update id="updateUserById" parameterType="ebUser">
+        update eb_user set
+        <if test="euUserName != null">
+            EU_USER_NAME = #{euUserName},
+        </if>
+        <if test="euPassword != null">
+            EU_PASSWORD = #{euPassword},
+        </if>
+        <if test="euSex != null">
+            EU_SEX = #{euSex},
+        </if>
+        <if test="euBirthday != null">
+            EU_BIRTHDAY = #{euBirthday},
+        </if>
+        <if test="euIdentityCode != null">
+            EU_IDENTITY_CODE = #{euIdentityCode},
+        </if>
+        <if test="euEmail != null">
+            EU_EMAIL = #{euEmail},
+        </if>
+        <if test="euMobile != null">
+            EU_MOBILE = #{euMobile},
+        </if>
+        <if test="euAddress != null">
+            EU_ADDRESS = #{euAddress},
+        </if>
+        <if test="euStatus != null">
+            EU_STATUS = #{euStatus}
+        </if>
+        where EU_USER_ID = #{euUserId}
+
+    </update>
+
+    <!--查-->
+    <select id="findAll" resultMap="userMap">
+        select <include refid="userColumn"/> from eb_user
+    </select>
+    <select id="findUser" parameterType="ebUser" resultMap="userMap">
+        select <include refid="userColumn"/> from eb_user
+        <where>
+            <if test="euUserId != null">
+                and EU_USER_ID = #{euUserId}
+            </if>
+            <if test="euUserName != null">
+                and EU_USER_NAME = #{euUserName}
+            </if>
+            <if test="euPassword != null">
+                and EU_PASSWORD = #{euPassword}
+            </if>
+            <if test="euSex != null">
+                and EU_SEX = #{euSex}
+            </if>
+            <if test="euBirthday != null">
+                and EU_BIRTHDAY = #{euBirthday}
+            </if>
+            <if test="euIdentityCode != null">
+               and EU_IDENTITY_CODE = #{euIdentityCode}
+            </if>
+            <if test="euEmail != null">
+                and EU_EMAIL = #{euEmail}
+            </if>
+            <if test="euMobile != null">
+                and EU_MOBILE = #{euMobile}
+            </if>
+            <if test="euAddress != null">
+                and EU_ADDRESS = #{euAddress}
+            </if>
+            <if test="euStatus != null">
+                and EU_STATUS = #{euStatus}
+            </if>
+        </where>
+    </select>
+
+</mapper>

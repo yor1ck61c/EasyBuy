@@ -1,7 +1,8 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>易买网 - 首页</title>
 <link type="text/css" rel="stylesheet" href="css/style.css" />
 <script type="text/javascript" src="scripts/function.js"></script>
@@ -9,7 +10,7 @@
 <body>
 <div id="header" class="wrap">
 	<div id="logo"><img src="images/logo.gif" /></div>
-	<div class="help"><a href="#" class="shopping">购物车</a><a href="login.html">登录</a><a href="register.html">注册</a><a href="guestbook.html">留言</a></div>
+	<div class="help"><a href="#" class="shopping">购物车</a><a href="login.jsp">登录</a><a href="register.jsp">注册</a><a href="guestbook.html">留言</a></div>
 	<div class="navbar">
 		<ul class="clearfix">
 			<li class="current"><a href="#">首页</a></li>
@@ -30,27 +31,27 @@
 			<li><a href="#">小说</a></li>
 			<li><a href="#">外语</a></li>
 			<li><a href="#">数码相机</a></li>
-			<li><a href="#">笔记本</a></li>
+			<li><a href="#">笔记本</a></li>			
 			<li class="last"><a href="#">Investor Relations</a></li>
 		</ul>
 	</div>
 </div>
-<div id="position" class="wrap">
-	您现在的位置：<a href="index.html">易买网</a> &gt; 购物车
-</div>
-<div class="wrap">
-	<div id="shopping">
-		<div class="shadow">
-			<em class="corner lb"></em>
-			<em class="corner rt"></em>
-			<div class="box">
-				<div class="msg">
-					<p>购买成功！</p>
-					<p>正在进入首页...</p>
-					<script type="text/javascript">
-						setTimeout("location.href='index.html'", 3000);
-					</script>
-				</div>
+<div id="register" class="wrap">
+	<div class="shadow">
+		<em class="corner lb"></em>
+		<em class="corner rt"></em>
+		<div class="box">
+			<h1>欢迎注册易买网</h1>
+			<ul class="steps clearfix">
+				<li class="finished"><em></em>填写注册信息</li>
+				<li class="last-current"><em></em>注册成功</li>
+			</ul>
+			<div class="msg">
+				<p>恭喜：注册成功！</p>
+				<p>正在进入首页...</p>
+				<script type="text/javascript">
+					setTimeout("location.href='index.jsp'", 3000);
+				</script>
 			</div>
 		</div>
 	</div>

@@ -11,7 +11,7 @@ import java.io.IOException;
 @Service("UserService")
 public class UserServiceImpl implements UserService {
 
-    @Resource
+    @Resource(name = "userMapper")
     private UserMapper mapper;
 
     public UserServiceImpl() throws IOException {
@@ -20,11 +20,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void register(EbUser user) throws IOException {
-        mapper.register(user);
+        mapper.insert(user);
     }
 
     @Override
     public EbUser loginCheck(EbUser user) {
-        return mapper.findUserByUP(user);
+        return mapper.findUser(user);
     }
 }

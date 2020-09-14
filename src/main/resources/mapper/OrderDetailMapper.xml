@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.oicp.yorick61c.mapper.OrderDetailMapper">
+
+    <sql id="OrderDetailColumn">
+        eod_id,eo_id,ep_id,eod_quantity,eod_cost
+    </sql>
+
+    <resultMap id="orderDetailMap" type="ebOrderDetail">
+        <id property="eodId" column="eod_id"/>
+        <result property="eoId" column="eo_id"/>
+        <result property="epId" column="ep_id"/>
+        <result property="eodQuantity" column="eod_quantity"/>
+        <result property="eodCost" column="eod_cost"/>
+    </resultMap>
+
+    <select id="findEbOrderDetailByPage" resultMap="orderDetailMap">
+        select <include refid="OrderDetailColumn"/> from eb_order_detail
+    </select>
+
+
+
+</mapper>
