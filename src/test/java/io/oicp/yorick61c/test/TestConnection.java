@@ -2,7 +2,11 @@ package io.oicp.yorick61c.test;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import io.oicp.yorick61c.domain.EbOrderDetail;
+import io.oicp.yorick61c.domain.EbProductCategory;
 import io.oicp.yorick61c.domain.EbUser;
+import io.oicp.yorick61c.mapper.OrderDetailMapper;
+import io.oicp.yorick61c.mapper.ProductCategoryMapper;
 import io.oicp.yorick61c.mapper.UserMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -30,6 +34,12 @@ public class TestConnection {
 
     @Resource(name = "userMapper")
     private UserMapper userMapper;
+
+    @Resource(name = "orderDetailMapper")
+    private OrderDetailMapper orderDetailMapper;
+
+    @Resource(name = "productCategoryMapper")
+    private ProductCategoryMapper productCategoryMapper;
 
     /*SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("SqlMapConfig.xml"));
     UserMapper mapper = sessionFactory.openSession(true).getMapper(UserMapper.class);*/
@@ -85,6 +95,27 @@ public class TestConnection {
 
         for (EbUser user: users) {
             System.out.println(user.toString());
+        }
+
+    }
+
+    @Test
+    public void test6() {
+        PageHelper.startPage(1,1);
+        List<EbOrderDetail> ebOrderDetailByPage = orderDetailMapper.findEbOrderDetailByPage();
+
+        for (EbOrderDetail e :ebOrderDetailByPage) {
+            System.out.println(e.toString());
+        }
+    }
+
+    @Test
+    public void test7(){
+        PageHelper.startPage(1,3);
+        List<EbProductCategory> productCategoryByPage = productCategoryMapper.findProductCategoryByPage();
+
+        for (EbProductCategory pc:productCategoryByPage) {
+            System.out.println(pc.toString());
         }
 
     }
