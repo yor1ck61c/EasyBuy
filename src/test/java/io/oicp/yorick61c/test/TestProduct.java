@@ -62,8 +62,4 @@ public class TestProduct {
         product.setEpId(664);
         productMapper.delete(product);
     }
-
-
-
-
 }

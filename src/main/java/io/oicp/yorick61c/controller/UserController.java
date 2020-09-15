@@ -5,10 +5,12 @@ import io.oicp.yorick61c.domain.EbUser;
 import io.oicp.yorick61c.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 
 @Controller
@@ -30,6 +32,14 @@ public class UserController {
         }
     }
 
+    @RequestMapping("/userList")
+    public ModelAndView findUserList() throws IOException {
+        List<EbUser> userList = service.findAll();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/manage/user");
+        modelAndView.addObject("userList",userList);
+        return modelAndView;
+    }
 
 
     @RequestMapping("/register")

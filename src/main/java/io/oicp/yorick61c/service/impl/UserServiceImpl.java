@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.util.List;
 
 @Service("UserService")
 public class UserServiceImpl implements UserService {
@@ -26,5 +27,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public EbUser loginCheck(EbUser user) {
         return mapper.findUser(user);
+    }
+
+    @Override
+    public List<EbUser> findAll() throws IOException {
+        return mapper.findAll();
     }
 }
