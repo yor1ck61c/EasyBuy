@@ -38,7 +38,9 @@
 </div>
 <div id="main" class="wrap">
     <div class="lefter">
-        <%@include file="/lefter.jsp"%>
+        <div class="box">
+            <%@include file="/lefter.jsp"%>
+        </div>
         <div class="box">
             <h2>商品分类</h2>
             <dl>

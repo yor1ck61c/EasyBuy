@@ -129,6 +129,9 @@
     </update>
 
     <!--查-->
+    <select id="countUser" resultType="int">
+        select count(*) from eb_user
+    </select>
     <select id="findAll" resultMap="userMap">
         select <include refid="userColumn"/> from eb_user
     </select>

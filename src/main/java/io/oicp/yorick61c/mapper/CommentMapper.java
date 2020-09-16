@@ -6,5 +6,10 @@ import java.util.List;
 
 public interface CommentMapper {
 
-    List<EbComment> findComment();
+    EbComment findEbComment(EbComment ebComment);
+
+    List<EbComment> findAll();
+
+
+
 }

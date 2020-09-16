@@ -11,7 +11,9 @@ public interface UserMapper {
 
     void insert(EbUser user);
 
-    void deleteUserById(String id);;
+    Integer countUser();
+
+    void deleteUserById(String id);
 
     List<EbUser> findAll() throws IOException;
 
