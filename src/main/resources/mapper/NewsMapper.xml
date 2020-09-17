@@ -4,6 +4,61 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="io.oicp.yorick61c.mapper.NewsMapper">
 
+    <sql id="newsColumn">
+        en_id,en_title,en_content,en_create_time
+    </sql>
 
+    <resultMap id="newsMap" type="ebNews">
+        <id column="en_id" property="enId"/>
+        <result column="en_title" property="enTitle"/>
+        <result column="en_content" property="enContent"/>
+        <result column="en_create_time" property="enCreateTime"/>
+    </resultMap>
 
+    <insert id="insert" parameterType="ebNews">
+        insert into eb_news values(null,#{enTitle},#{enContent},#{enCreateTime})
+    </insert>
+
+    <update id="update" parameterType="ebNews">
+        update eb_news set
+        <trim suffixOverrides=",">
+            <if test="enTitle != null">
+                en_title = #{enTitle},
+            </if>
+            <if test="enContent != null">
+                en_content = #{enContent},
+            </if>
+        </trim>
+        where en_id = #{enId}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from eb_news where en_id = #{id}
+    </delete>
+
+    <select id="findAll" resultMap="newsMap">
+        select <include refid="newsColumn"/> from eb_news
+    </select>
+
+    <select id="countNews" resultType="int">
+        select count(*) from eb_news
+    </select>
+
+    <select id="findNews" parameterType="ebNews" resultMap="newsMap">
+        select <include refid="newsColumn"/> from eb_news
+        <where>
+            <if test="enId != 0">
+                and en_id = #{enId}
+            </if>
+            <if test="enTitle != null">
+                and en_title = #{enTitle}
+            </if>
+            <if test="enContent != null">
+                and en_content = #{enContent}
+            </if>
+            <if test="enCreateTime != null">
+                and en_create_time = #{enCreateTime}
+            </if>
+        </where>
+    </select>
 </mapper>

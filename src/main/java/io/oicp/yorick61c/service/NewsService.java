@@ -1,7 +1,18 @@
 package io.oicp.yorick61c.service;
 
-import org.springframework.stereotype.Service;
+import io.oicp.yorick61c.domain.EbNews;
+import io.oicp.yorick61c.domain.PageBean;
 
 
 public interface NewsService {
+
+    PageBean<EbNews> findNewsListByPage(Integer currentPage, Integer rows);
+
+    void delNewsById(Integer id);
+
+    EbNews findNews(EbNews ebNews);
+
+    void updateNews(EbNews news);
+
+    void addNews(EbNews news);
 }
