@@ -4,6 +4,96 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="io.oicp.yorick61c.mapper.CommentMapper">
 
+    <sql id="commentColumn">
+        ec_Id,ec_Content,ec_Create_Time,ec_Reply,ec_Reply_Time,ec_Nick_Name
+    </sql>
 
+    <resultMap id="commentMap" type="ebComment">
+        <result property="ecId" column="ec_Id"></result>
+        <result property="ecContent" column="ec_Content"></result>
+        <result property="ecCreateTime" column="ec_Create_Time"></result>
+        <result property="ecReply" column="ec_Reply"></result>
+        <result property="ecReplyTime" column="ec_Reply_Time"></result>
+        <result property="ecNickName" column="ec_Nick_Name"></result>
+    </resultMap> <!---sql 片段-->
 
+    <select id="countComments" resultType="int">
+        select count(*) from eb_comment
+    </select>
+
+    <select id="findAll" resultMap="commentMap">
+        select <include refid="commentColumn"/> from eb_comment
+    </select>
+
+    <select id="findEbComment" parameterType="ebComment" resultMap="commentMap">
+        select <include refid="commentColumn"/> from eb_comment
+        <where>
+            <if test="ecId > 0">
+                and ec_Id = #{ecId}
+            </if>
+            <if test="ecContent != null">
+                and ec_Content = #{ecContent}
+            </if>
+            <if test="ecCreateTime != null">
+                and ec_Create_Time = #{ecCreateTime}
+            </if>
+            <if test="ecReply != null">
+                and ec_Reply = #{ecReply}
+            </if>
+            <if test="ecReplyTime != null">
+                and ec_Reply_Time = #{ecReplyTime}
+            </if>
+            <if test="ecNickName != null">
+                and ec_Nick_Name = #{ecNickName}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insert" parameterType="ebComment">
+        insert into eb_comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            ec_id,
+            <if test="ecContent!=null">
+                EC_CONTENT,
+            </if>
+            <if test="ecCreateTime!=null">EC_CREATE_TIME,</if>
+            <if test="ecReply!=null">EC_REPLY,</if>
+            <if test="ecReplyTime!=null">EC_REPLY_TIME,</if>
+            <if test="ecNickName!=null">EC_NICK_NAME,</if>
+
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            null ,
+            <if test="ecContent!=null">#{ecContent},</if>
+            <if test="ecCreateTime!=null">#{ecCreateTime},</if>
+            <if test="ecReply!=null">#{ecReply},</if>
+            <if test="ecReplyTime!=null">#{ecReplyTime},</if>
+            <if test="ecNickName!=null">#{ecNickName},</if>
+        </trim>
+
+    </insert>
+
+    <delete id="delete" parameterType="ebComment">
+        delete from eb_comment where ec_id=#{ecId}
+    </delete>
+
+    <update id ="update" parameterType="ebComment">
+        update eb_comment
+        <set>
+            <if test="ecContent!=null">
+                ec_Content = #{ecContent},
+            </if>
+            <if test="ecReply!=null">
+                ec_Reply = #{ecReply},
+            </if>
+            <if test="ecReplyTime!=null">
+                ec_Reply_Time = #{ecReplyTime},
+            </if>
+            <if test="ecNickName!=null">
+                ec_Nick_Name = #{ecNickName},
+            </if>
+        </set>
+        where ec_id = #{ecId}
+    </update>
 </mapper>

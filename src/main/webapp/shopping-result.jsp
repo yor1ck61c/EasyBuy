@@ -1,11 +1,13 @@
-﻿<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>易买网 - 首页</title>
-<link type="text/css" rel="stylesheet" href="css/style.css" />
-<script type="text/javascript" src="scripts/function.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>易买网 - 首页</title>
+	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
+	<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/function.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery-3.5.1.min.js"></script>
 </head>
 <body>
 <div id="header" class="wrap">
@@ -26,13 +28,12 @@
 				<a href="${pageContext.request.contextPath}/user/quit">退出登录</a>
 			</c:if>
 		</c:if>
-		<a href="${pageContext.request.contextPath}/comment/u_list/1/5">留言</a>
-	</div>
+		<a href="${pageContext.request.contextPath}/comment/u_list/1/5">留言</a></div>
 	<div class="navbar">
 		<ul class="clearfix">
-			<li class="current"><a href="${pageContext.request.contextPath}/index/welcome/1/8">首页</a></li>
+			<li class="current"><a href="${pageContext.request.contextPath}/index.jsp">首页</a></li>
 			<c:forEach items="${sessionScope.parent}" var="pcp" >
-				<li><a href="${pageContext.request.contextPath}/product/getChildProductList/${pcp.epcId}">${pcp.epcName}</a></li>
+				<li><a href="#">${pcp.epcName}</a></li>
 			</c:forEach>
 		</ul>
 	</div>
@@ -51,22 +52,22 @@
 		</ul>
 	</div>
 </div>
-<div id="register" class="wrap">
-	<div class="shadow">
-		<em class="corner lb"></em>
-		<em class="corner rt"></em>
-		<div class="box">
-			<h1>欢迎注册易买网</h1>
-			<ul class="steps clearfix">
-				<li class="finished"><em></em>填写注册信息</li>
-				<li class="last-current"><em></em>注册成功</li>
-			</ul>
-			<div class="msg">
-				<p>恭喜：注册成功！</p>
-				<p>正在进入首页...</p>
-				<script type="text/javascript">
-					setTimeout("location.href='${pageContext.request.contextPath}/index/welcome/1/8'", 3000);
-				</script>
+<div id="position" class="wrap">
+	您现在的位置：<a href="index.html">易买网</a> &gt; 购物车结算页面
+</div>
+<div class="wrap">
+	<div id="shopping">
+		<div class="shadow">
+			<em class="corner lb"></em>
+			<em class="corner rt"></em>
+			<div class="box">
+				<div class="msg">
+					<p>购买成功！</p>
+					<p>正在进入首页...</p>
+					<script type="text/javascript">
+						setTimeout("location.href='${pageContext.request.contextPath}/index/welcome/1/8'", 3000);
+					</script>
+				</div>
 			</div>
 		</div>
 	</div>

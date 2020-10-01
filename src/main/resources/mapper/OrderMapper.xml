@@ -4,6 +4,142 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="io.oicp.yorick61c.mapper.OrderMapper">
 
+    <resultMap id="orderMap" type="io.oicp.yorick61c.domain.EbOrder">
+        <id property="eoId" column="eo_id"></id>
+        <result property="eoUserId" column="eo_user_id"></result>
+        <result property="eoUserName" column="eo_user_name"></result>
+        <result property="eoUserAddress" column="eo_user_address"></result>
+        <result property="eoCreateTime" column="eo_create_time"></result>
+        <result property="eoCost" column="eo_cost"></result>
+        <result property="eoStatus" column="eo_status"></result>
+        <result property="eoType" column="eo_type"></result>
+    </resultMap> <!---sql 片段-->
+    <sql id="orderColumn">
+            eo_id,eo_user_id,eo_user_name,eo_user_address,eo_create_time,eo_cost,eo_status,eo_type
+    </sql>
 
+    <select id="countOrder" resultType="int">
+        select count(*) from eb_order
+    </select>
 
+    <select id="findAll" resultMap="orderMap">
+        select <include refid="orderColumn"/> from eb_order
+    </select>
+
+    <select id="findOrders" parameterType="ebOrder" resultMap="orderMap">
+        select <include refid="orderColumn"/> from eb_order
+        <where>
+            <if test="eoId != null">
+                and eo_id = #{eoId}
+            </if>
+            <if test="eoUserId != null">
+                and eo_user_id = #{eoUserId}
+            </if>
+            <if test="eoUserName != null">
+                and eo_user_name = #{eoUserName}
+            </if>
+            <if test="eoUserAddress != null">
+                and eo_user_address = #{eoUserAddress}
+            </if>
+            <if test="eoCreateTime != null">
+                and eo_create_time = #{eoCreateTime}
+            </if>
+            <if test="eoCost != null">
+                and eo_cost = #{eoCost}
+            </if>
+            <if test="eoStatus != null">
+                and eo_status = #{eoStatus}
+            </if>
+            <if test="eoType != null">
+                and eo_type = #{eoType}
+            </if>
+        </where>
+    </select>
+    
+    <select id="findOrder" parameterType="ebOrder" resultMap="orderMap">
+        select <include refid="orderColumn"/> from eb_order
+        <where>
+            <if test="eoId != null">
+                and eo_id = #{eoId}
+            </if>
+            <if test="eoUserId != null">
+                and eo_user_id = #{eoUserId}
+            </if>
+            <if test="eoUserName != null">
+                and eo_user_name = #{eoUserName}
+            </if>
+            <if test="eoUserAddress != null">
+                and eo_user_address = #{eoUserAddress}
+            </if>
+            <if test="eoCreateTime != null">
+                and eo_create_time = #{eoCreateTime}
+            </if>
+            <if test="eoCost != null">
+                and eo_cost = #{eoCost}
+            </if>
+            <if test="eoStatus != null">
+                and eo_status = #{eoStatus}
+            </if>
+            <if test="eoType != null">
+                and eo_type = #{eoType}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insert" parameterType="ebOrder">
+        insert into eb_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="eoId!=null">eo_id, </if>
+            <if test="eoUserId!=null">eo_user_id, </if>
+            <if test="eoUserName!=null">eo_user_name,</if>
+            <if test="eoUserAddress!=null">eo_user_address,</if>
+            <if test="eoCreateTime!=null">eo_create_time,</if>
+            <if test="eoCost!=null">eo_cost,</if>
+            <if test="eoStatus!=null">eo_status,</if>
+            <if test="eoType!=null">eo_type,</if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="eoId!=null">#{eoId}, </if>
+            <if test="eoUserId!=null">  #{eoUserId}, </if>
+            <if test="eoUserName!=null">#{eoUserName},</if>
+            <if test="eoUserAddress!=null">#{eoUserAddress},</if>
+            <if test="eoCreateTime!=null">#{eoCreateTime},</if>
+            <if test="eoCost!=null">#{eoCost},</if>
+            <if test="eoStatus!=null">#{eoStatus},</if>
+            <if test="eoType!=null">#{eoType},</if>
+        </trim>
+    </insert>
+
+    <delete id="delete" parameterType="ebOrder">
+        delete  from eb_order where eo_id=#{eoId}
+    </delete>
+
+    <update id ="update" parameterType="ebOrder">
+        update eb_order
+        <set>
+            <if test="eoUserId!=null">
+                eo_user_id = #{eoUserId},
+            </if>
+            <if test="eoUserName!=null">
+                eo_user_name = #{eoUserName},
+            </if>
+            <if test="eoUserAddress!=null">
+                eo_user_address = #{eoUserAddress},
+            </if>
+            <if test="eoCreateTime!=null">
+                eo_create_time = #{eoCreateTime},
+            </if>
+            <if test="eoCost!=null">
+                eo_cost = #{eoCost},
+            </if>
+            <if test="eoStatus>0">
+                eo_status = #{eoStatus},
+            </if>
+            <if test="eoType>0">
+                eo_type = #{eoType},
+            </if>
+        </set>
+        where eo_id = #{eoId}
+    </update>
 </mapper>

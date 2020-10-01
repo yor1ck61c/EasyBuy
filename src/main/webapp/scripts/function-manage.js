@@ -1,7 +1,7 @@
 document.charset='utf-8'
 function Delete(url)
 {
-	if(confirm("È·¶¨É¾³ıÂğ")){
+	if(confirm("ç¡®å®šåˆ é™¤å—")){
 		location.href = url;
 	}
 }
@@ -21,81 +21,81 @@ function CheckItem(obj)
 	switch(obj.name) {
 		case "title":
 			if(obj.value == "") {
-				msgBox.innerHTML = "±êÌâ²»ÄÜÎª¿Õ";
+				msgBox.innerHTML = "æ ‡é¢˜ä¸èƒ½ä¸ºç©º";
 				msgBox.className = "error";
 				return false;
 			}
 			break;
 		case "content":
 			if(obj.value == "") {
-				msgBox.innerHTML = "ÄÚÈİ²»ÄÜÎª¿Õ";
+				msgBox.innerHTML = "å†…å®¹ä¸èƒ½ä¸ºç©º";
 				msgBox.className = "error";
 				return false;
 			}
 			break;
 		case "replyContent":
 			if(obj.value == "") {
-				msgBox.innerHTML = "»Ø¸´ÄÚÈİ²»ÄÜÎª¿Õ";
+				msgBox.innerHTML = "å›å¤å†…å®¹ä¸èƒ½ä¸ºç©º";
 				msgBox.className = "error";
 				return false;
 			} else if(obj.value != document.getElementById("passWord").value) {
-				msgBox.innerHTML = "Á½´ÎÊäÈëµÄÃÜÂë²»ÏàÍ¬";
+				msgBox.innerHTML = "ä¸¤æ¬¡è¾“å…¥çš„å¯†ç ä¸ç›¸åŒ";
 				msgBox.className = "error";
 				return false;
 			}
 			break;
 		case "productName":
 			if(obj.value == "") {
-				msgBox.innerHTML = "ÉÌÆ·Ãû³Æ²»ÄÜÎª¿Õ";
+				msgBox.innerHTML = "å•†å“åç§°ä¸èƒ½ä¸ºç©º";
 				msgBox.className = "error";
 				return false;
 			}
 			break;
 		case "productPrice":
 			if(obj.value == "") {
-				msgBox.innerHTML = "ÉÌÆ·¼Û¸ñ²»ÄÜÎª¿Õ";
+				msgBox.innerHTML = "å•†å“ä»·æ ¼ä¸èƒ½ä¸ºç©º";
 				msgBox.className = "error";
 				return false;
 			}
 			break;
 		case "productStock":
 			if(obj.value == "") {
-				msgBox.innerHTML = "ÉÌÆ·¿â´æ²»ÄÜÎª¿Õ";
+				msgBox.innerHTML = "å•†å“åº“å­˜ä¸èƒ½ä¸ºç©º";
 				msgBox.className = "error";
 				return false;
 			}
 			break;
 		case "className":
 			if(obj.value == "") {
-				msgBox.innerHTML = "·ÖÀàÃû²»ÄÜÎª¿Õ";
+				msgBox.innerHTML = "åˆ†ç±»åä¸èƒ½ä¸ºç©º";
 				msgBox.className = "error";
 				return false;
 			}
 			break;
 		case "userName":
 			if(obj.value == "") {
-				msgBox.innerHTML = "ÓÃ»§Ãû²»ÄÜÎª¿Õ";
+				msgBox.innerHTML = "ç”¨æˆ·åä¸èƒ½ä¸ºç©º";
 				msgBox.className = "error";
 				return false;
 			}
 			break;
 		case "realName":
 			if(obj.value == "") {
-				msgBox.innerHTML = "ĞÕÃû²»ÄÜÎª¿Õ";
+				msgBox.innerHTML = "å§“åä¸èƒ½ä¸ºç©º";
 				msgBox.className = "error";
 				return false;
 			}
 			break;
 		case "passWord":
 			if(obj.value == "") {
-				msgBox.innerHTML = "ÃÜÂë²»ÄÜÎª¿Õ";
+				msgBox.innerHTML = "å¯†ç ä¸èƒ½ä¸ºç©º";
 				msgBox.className = "error";
 				return false;
 			}
 			break;
 		case "address":
 			if(obj.value == "") {
-				msgBox.innerHTML = "µØÖ·²»ÄÜÎª¿Õ";
+				msgBox.innerHTML = "åœ°å€ä¸èƒ½ä¸ºç©º";
 				msgBox.className = "error";
 				return false;
 			}

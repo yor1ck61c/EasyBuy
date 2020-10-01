@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="io.oicp.yorick61c.mapper.ProductCategoryMapper">
 
-    <sql id="productCategoryColomn">
+    <sql id="productCategoryColumn">
         EPC_ID,EPC_NAME,EPC_PARENT_ID
     </sql>
 
@@ -15,8 +15,75 @@
         <result column="EPC_PARENT_ID" property="epcParentId"/>
     </resultMap>
 
-    <select id="findProductCategoryByPage" resultMap="productCategoryMap">
-        select <include refid="productCategoryColomn"/> from eb_product_category
+    <select id="findParent" resultMap="productCategoryMap">
+        select <include refid="productCategoryColumn"/> from eb_product_category
+        where EPC_ID = EPC_PARENT_ID
     </select>
+
+    <select id="findChild" resultMap="productCategoryMap">
+        select <include refid="productCategoryColumn"/> from eb_product_category
+        where EPC_ID != EPC_PARENT_ID
+    </select>
+
+    <select id="countPC" resultType="int">
+        select count(*) from eb_product_category
+    </select>
+
+    <select id="findAll" resultMap="productCategoryMap">
+        select <include refid="productCategoryColumn"/> from eb_product_category
+    </select>
+
+    <select id="findProductCategory" parameterType="ebProductCategory" resultMap="productCategoryMap">
+        select <include refid="productCategoryColumn"/> from eb_product_category
+        <where>
+            <if test="epcId > 0">
+                and EPC_ID = #{epcId}
+            </if>
+            <if test="epcName != null">
+                and EPC_NAME = #{epcName}
+            </if>
+
+            <if test="epcParentId > 0">
+                and EPC_PARENT_ID = #{epcParentId}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insert" parameterType="ebProductCategory">
+        insert into eb_product_category
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                EPC_ID,
+            <if test="epcName!=null">
+                EPC_NAME,
+            </if>
+            <if test="epcParentId>0">
+                EPC_PARENT_ID,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            null,
+            <if test="epcName!=null">
+                #{epcName},
+            </if>
+            <if test="epcParentId>0">
+                #{epcParentId},
+            </if>
+
+        </trim>
+    </insert>
+
+    <delete id="delete" parameterType="ebProductCategory">
+     delete from eb_product_category where epc_id=#{epcId}
+    </delete>
+
+    <update id="update" parameterType="ebProductCategory">
+        update eb_product_category
+        <set>
+            <if test="epcName!=null">epc_name=#{epcName},</if>
+            <if test="epcParentId>0">epc_parent_id=#{epcParentId},</if>
+        </set>
+        where epc_id=#{epcId}
+    </update>
 
 </mapper>

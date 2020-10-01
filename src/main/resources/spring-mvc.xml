@@ -27,13 +27,19 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!--配置拦截器-->
-    <!--<mvc:interceptors>
+    <bean id="myException" class="io.oicp.yorick61c.exception.MyExceptionResolver"/>
+
+    <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            &lt;!&ndash;配置不拦截的资源&ndash;&gt;
-            <mvc:exclude-mapping path="/user/login"/>
-            <bean class="io.oicp.yorick61c.interceptor.PrivilegeInterceptor"/>
+            <!--配置不拦截的资源-->
+            <mvc:exclude-mapping path="/jump_to_index.jsp"/>
+            <mvc:exclude-mapping path="/user/**"/>
+            <mvc:exclude-mapping path="/index/welcome/**"/>
+            <mvc:exclude-mapping path="/index.jsp"/>
+            <mvc:exclude-mapping path="/register.jsp"/>
+            <mvc:exclude-mapping path="/reg-result.jsp"/>
+            <bean class="io.oicp.yorick61c.interceptor.CheckLoginInterceptor"/>
         </mvc:interceptor>
-    </mvc:interceptors>-->
+    </mvc:interceptors>
 </beans>

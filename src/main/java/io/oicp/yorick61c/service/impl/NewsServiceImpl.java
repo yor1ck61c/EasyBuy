@@ -9,6 +9,7 @@ import org.mybatis.spring.mapper.MapperFactoryBean;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service("NewsService")
 public class NewsServiceImpl implements NewsService {
@@ -49,5 +50,10 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public void addNews(EbNews news) {
         newsMapper.insert(news);
+    }
+
+    @Override
+    public List<EbNews> findAll() {
+        return newsMapper.findAll();
     }
 }

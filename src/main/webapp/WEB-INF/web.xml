@@ -6,7 +6,7 @@
 
 
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>jump_to_index.jsp</welcome-file>
   </welcome-file-list>
   <!--解决乱码的过滤器-->
   <filter>
@@ -32,6 +32,13 @@
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
 
+
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.js</url-pattern>
+    <url-pattern>*.css</url-pattern>
+    <url-pattern>/images/*</url-pattern>
+  </servlet-mapping>
 
   <!--SpringMVC的前端控制器-->
   <servlet>

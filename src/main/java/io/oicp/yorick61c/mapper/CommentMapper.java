@@ -10,6 +10,11 @@ public interface CommentMapper {
 
     List<EbComment> findAll();
 
+    Integer countComments();
 
+    void insert(EbComment comment);
 
+    void delete(EbComment comment);
+
+    void update(EbComment comment);
 }

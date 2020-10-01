@@ -28,12 +28,27 @@ public class NewsController {
         if (currentPage == null)
             currentPage = 1;
         if (rows == null)
-            rows = 3;
+            rows = 4;
 
         PageBean<EbNews> newsList = newsService.findNewsListByPage(currentPage, rows);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("newsList",newsList);
         modelAndView.setViewName("/manage/news");
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/lists/{currentPage}/{rows}")
+    public ModelAndView findNewsByPage2(@PathVariable Integer currentPage, @PathVariable Integer rows) {
+        if (currentPage == null)
+            currentPage = 1;
+        if (rows == null)
+            rows = 5;
+
+        PageBean<EbNews> newsList = newsService.findNewsListByPage(currentPage, rows);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("newsList",newsList);
+        modelAndView.setViewName("/news-view");
 
         return modelAndView;
     }
@@ -66,7 +81,6 @@ public class NewsController {
     @RequestMapping("/add")
     public String addNews(EbNews news) {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
         news.setEnCreateTime(df.format(new Date()));
         newsService.addNews(news);
         return "redirect:/news/list/1/3";

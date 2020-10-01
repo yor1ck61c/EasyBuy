@@ -16,9 +16,75 @@
         <result property="eodCost" column="eod_cost"/>
     </resultMap>
 
-    <select id="findEbOrderDetailByPage" resultMap="orderDetailMap">
+    <select id="findAll" resultMap="orderDetailMap">
         select <include refid="OrderDetailColumn"/> from eb_order_detail
     </select>
+
+    <select id="findOrderDetail" resultMap="orderDetailMap">
+        select <include refid="OrderDetailColumn"/> from eb_order_detail
+        <where>
+            <if test="eodId != null">
+                and eod_id = #{eodId}
+            </if>
+            <if test="eoId != null">
+                and eo_id = #{eoId}
+            </if>
+            <if test="epId != null">
+                and ep_id = #{epId}
+            </if>
+            <if test="eodQuantity != null">
+                and eod_quantity = #{eodQuantity}
+            </if>
+            <if test="eodCost != null">
+                and eod_cost = #{eodCost}
+            </if>
+        </where>
+    </select>
+    <insert id="insert" parameterType="ebOrderDetail">
+        insert into eb_order_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="eodId>0">
+                eod_id,
+            </if>
+            <if test="eoId!=null">
+                eo_id,
+            </if>
+            <if test="epId!=null">ep_id,</if>
+            <if test="eodQuantity!=null">eod_quantity,</if>
+            <if test="eodCost!=null">eod_cost,</if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="eodId>0">#{eodId},</if>
+            <if test="eoId!=null">#{eoId},</if>
+            <if test="epId!=null">#{epId},</if>
+            <if test="eodQuantity!=null">#{eodQuantity},</if>
+            <if test="eodCost!=null">#{eodCost},</if>
+        </trim>
+    </insert>
+    <delete id="delete" parameterType="ebOrderDetail">delete from eb_order_detail where eod_id=#{eodId}</delete>
+    <update id ="update" parameterType="ebOrderDetail">
+        update eb_order_detail
+        <set>
+            <if test="eodId!=null">
+                eod_id = #{eodId},
+            </if>
+            <if test="eoId!=null">
+                eo_id = #{eoId},
+            </if>
+            <if test="epId!=null">
+                ep_id = #{epId},
+            </if>
+            <if test="eodQuantity!=null">
+                eod_quantity = #{eodQuantity},
+            </if>
+            <if test="eodCost!=null">
+                eod_cost = #{eodCost},
+            </if>
+        </set>
+        where eod_id = #{eodId}
+
+    </update>
 
 
 

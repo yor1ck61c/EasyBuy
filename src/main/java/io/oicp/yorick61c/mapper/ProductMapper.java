@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface ProductMapper {
 
+    Integer countProduct();
+
     List<EbProduct> findAll();
 
     EbProduct findProduct(EbProduct product);
@@ -16,4 +18,5 @@ public interface ProductMapper {
 
     void insert(EbProduct product);
 
+    List<EbProduct> findCPLById(Integer epcId);
 }

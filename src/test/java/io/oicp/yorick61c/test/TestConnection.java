@@ -79,24 +79,6 @@ public class TestConnection {
 
     }
 
-    @Test
-    public void test6() {
-        PageHelper.startPage(1,1);
-        List<EbOrderDetail> ebOrderDetailByPage = orderDetailMapper.findEbOrderDetailByPage();
 
-        for (EbOrderDetail e :ebOrderDetailByPage) {
-            System.out.println(e.toString());
-        }
-    }
 
-    @Test
-    public void test7(){
-        PageHelper.startPage(1,3);
-        List<EbProductCategory> productCategoryByPage = productCategoryMapper.findProductCategoryByPage();
-
-        for (EbProductCategory pc:productCategoryByPage) {
-            System.out.println(pc.toString());
-        }
-
-    }
 }

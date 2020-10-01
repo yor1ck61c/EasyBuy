@@ -1,52 +1,81 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>易买网 - 首页</title>
+    <title>amazon海外购</title>
     <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
     <script type="text/javascript" src="${pageContext.request.contextPath}/scripts/function.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery-3.5.1.min.js"></script>
 </head>
-<body>
+<body >
 <div id="header" class="wrap">
-    <div id="logo"><img src="${pageContext.request.contextPath}/images/logo.gif" /></div>
-    <div class="help"><a href="#" class="shopping">购物车</a><a href="${pageContext.request.contextPath}/login.jsp">登录</a><a href="${pageContext.request.contextPath}/register.jsp">注册</a><a href="guestbook.html">留言</a></div>
+    <div id="logo" style="margin-right: 50px"><img style="width: 150px;height: 50px" src="${pageContext.request.contextPath}/images/logo.gif" /></div>
+    <div class="help"><a href="${pageContext.request.contextPath}/shopping.jsp" class="shopping">购物车</a>
+        <c:if test="${sessionScope.user == null}" >
+            <a href="${pageContext.request.contextPath}/login.jsp">登录</a>
+            <a href="${pageContext.request.contextPath}/register.jsp">注册</a>
+        </c:if>
+        <c:if test="${sessionScope.user != null}">
+            <c:if test="${sessionScope.user.euStatus == 1}">
+                欢迎您!${user.euUserName}
+                <a href="${pageContext.request.contextPath}/user/quit">退出登录</a>
+            </c:if>
+            <c:if test="${sessionScope.user.euStatus == 2}">
+                欢迎您!${user.euUserName}
+                <a href="${pageContext.request.contextPath}/manage/manage.jsp">进入后台管理</a>
+                <a href="${pageContext.request.contextPath}/user/quit">退出登录</a>
+            </c:if>
+        </c:if>
+        <a href="${pageContext.request.contextPath}/comment/u_list/1/5">留言</a>
+    </div>
     <div class="navbar">
         <ul class="clearfix">
-            <li class="current"><a href="#">首页</a></li>
-            <li><a href="#">图书</a></li>
-            <li><a href="#">百货</a></li>
-            <li><a href="#">品牌</a></li>
-            <li><a href="#">促销</a></li>
+            <li class="current"><a href="${pageContext.request.contextPath}/index/welcome/1/8">首页</a></li>
+            <c:forEach items="${sessionScope.parent}" var="pcp" >
+                <li><a href="${pageContext.request.contextPath}/product/getChildProductList/${pcp.epcId}">${pcp.epcName}</a></li>
+            </c:forEach>
         </ul>
     </div>
 </div>
 <div id="childNav">
     <div class="wrap">
-        <ul class="clearfix">
-            <li class="first"><a href="#">音乐</a></li>
-            <li><a href="#">影视</a></li>
-            <li><a href="#">少儿</a></li>
-            <li><a href="#">动漫</a></li>
-            <li><a href="#">小说</a></li>
-            <li><a href="#">外语</a></li>
-            <li><a href="#">数码相机</a></li>
-            <li><a href="#">笔记本</a></li>
-            <li class="last"><a href="#">Investor Relations</a></li>
-        </ul>
+        <%--<ul class="clearfix">
+            <c:forEach items="${sessionScope.child}" var="pcc" varStatus="status" begin="1" end="4">
+                <c:if test="${status.index + 1} == 1">
+                    <li class="first"><a href="#">${pcc.epcName}</a></li>
+                </c:if>
+                <c:if test="${status.index + 1} == 4">
+                    <li class="last"><a href="#">${pcc.epcName}</a></li>
+                </c:if>
+            </c:forEach>
+        </ul>--%>
+        <form method="post" action="#">
+            <div style="margin-top: 3px;float: right; color: gainsboro">
+                <label>
+                   想买点啥：<input type="text" name="epName" style="color: black" placeholder="输入你想要购买的商品..."/>
+                </label>
+                <input type="button" value="搜索"/>
+            </div>
+
+        </form>
     </div>
 </div>
 <div id="main" class="wrap">
     <div class="lefter">
         <div class="box">
-            <%@include file="/lefter.jsp"%>
-        </div>
-        <div class="box">
             <h2>商品分类</h2>
-            <dl>
-                <dt>图书音像</dt>
-                <dd><a href="product-list.html">图书</a></dd>
-            </dl>
+            <c:forEach items="${sessionScope.parent}" var="pcp">
+                <dl>
+                    <dt>${pcp.epcName}</dt>
+                    <c:forEach items="${sessionScope.child}" var="pcc">
+                        <c:if test="${pcp.epcId eq pcc.epcParentId}">
+                            <dd><a href="${pageContext.request.contextPath}/product/getChildProductList/${pcp.epcId}">${pcc.epcName}</a></dd>
+                        </c:if>
+                    </c:forEach>
+                </dl>
+            </c:forEach>
         </div>
         <div class="spacer">
 
@@ -54,10 +83,10 @@
         <div class="last-view">
             <h2>最近浏览</h2>
             <dl class="clearfix">
-                <dt><img src="images/product/0_tiny.gif" /></dt>
-                <dd><a href="product-view.html">法国德菲丝松露精品巧克力500g/盒</a></dd>
-                <dt><img src="images/product/0_tiny.gif" /></dt>
-                <dd><a href="product-view.html">法国德菲丝松露精品巧克力500g/盒</a></dd>
+                <c:forEach items="${sessionScope.recentView}" var="item">
+                    <dt><img src="${pageContext.request.contextPath}/images/product/${item.epFileName}" /></dt>
+                    <dd><a href="${pageContext.request.contextPath}/product/view/${item.epId}">${item.epName}</a></dd>
+                </c:forEach>
             </dl>
         </div>
     </div>
@@ -65,69 +94,43 @@
         <div class="price-off">
             <h2>商品列表</h2>
             <ul class="product clearfix">
-                <li>
-                    <dl>
-                        <dt><a href="product-view.html" target="_blank"><img src="images/product/1.jpg" /></a></dt>
-                        <dd class="title"><a href="product-view.html" target="_blank">法国德菲丝松露精品巧克力500g/盒</a></dd>
-                        <dd class="price">￥108.0</dd>
-                    </dl>
-                </li>
-                <li>
-                    <dl>
-                        <dt><a href="product-view.html" target="_blank"><img src="images/product/2.jpg" /></a></dt>
-                        <dd class="title"><a href="product-view.html" target="_blank">乐扣普通型保鲜盒圣诞7件套</a></dd>
-                        <dd class="price">￥69.90</dd>
-                    </dl>
-                </li>
-                <li>
-                    <dl>
-                        <dt><a href="product-view.html" target="_blank"><img src="images/product/3.jpg" /></a></dt>
-                        <dd class="title"><a href="product-view.html" target="_blank">欧珀莱均衡保湿四件套</a></dd>
-                        <dd class="price">￥279.0</dd>
-                    </dl>
-                </li>
-                <li>
-                    <dl>
-                        <dt><a href="product-view.html" target="_blank"><img src="images/product/4.jpg" /></a></dt>
-                        <dd class="title"><a href="product-view.html" target="_blank">联想笔记本电脑 高速独立显存</a></dd>
-                        <dd class="price">￥4199</dd>
-                    </dl>
-                </li>
-                <li>
-                    <dl>
-                        <dt><a href="product-view.html" target="_blank"><img src="images/product/5.jpg" /></a></dt>
-                        <dd class="title"><a href="product-view.html" target="_blank">法姿韩版显瘦彩边时尚牛仔铅笔裤</a></dd>
-                        <dd class="price">￥49.00</dd>
-                    </dl>
-                </li>
-                <li>
-                    <dl>
-                        <dt><a href="product-view.html" target="_blank"><img src="images/product/6.jpg" /></a></dt>
-                        <dd class="title"><a href="product-view.html" target="_blank">Genius925纯银施华洛世奇水晶吊坠</a></dd>
-                        <dd class="price">￥69.90</dd>
-                    </dl>
-                </li>
-                <li>
-                    <dl>
-                        <dt><a href="product-view.html" target="_blank"><img src="images/product/7.jpg" /></a></dt>
-                        <dd class="title"><a href="product-view.html" target="_blank">利仁2018M福满堂电饼铛 好用实惠</a></dd>
-                        <dd class="price">￥268.0</dd>
-                    </dl>
-                </li>
-                <li>
-                    <dl>
-                        <dt><a href="product-view.html" target="_blank"><img src="images/product/8.jpg" /></a></dt>
-                        <dd class="title"><a href="product-view.html" target="_blank">达派高档拉杆箱20寸 经典款式</a></dd>
-                        <dd class="price">￥198.0</dd>
-                    </dl>
-                </li>
+                <c:forEach items="${products.items}" var="product">
+                    <li>
+                        <dl>
+                            <dt>
+                                <a href="${pageContext.request.contextPath}/product/view/${product.epId}" target="_blank">
+                                <img src="${pageContext.request.contextPath}/images/product/${product.epFileName}" />
+                                </a>
+                            </dt>
+                            <dd class="title">
+                                <a href="${pageContext.request.contextPath}/product/view/${product.epId}" target="_blank">${product.epName}
+                                </a>
+                            </dd>
+                            <dd class="price">￥${product.epPrice}</dd>
+                        </dl>
+                    </li>
+                </c:forEach>
+
+                
             </ul>
 
             <div class="pager">
-
                 <ul class="clearfix">
-                    <li class="current">1</li>
-                    <li><a href="#">2</a></li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/index/welcome/${products.currentPage == 1 ? products.currentPage : products.currentPage - 1}/8">上一页</a>
+                    </li>
+                    <c:forEach begin="${products.currentPage > 8 ? products.currentPage - 8 : 1}" end="${products.totalPages - products.currentPage > 8 ? products.currentPage + 8  : products.totalPages  }" var="i">
+                        <c:if test="${products.currentPage == i}">
+                            <li class="current"><a href="${pageContext.request.contextPath}/index/welcome/${i}/8">${i}</a></li>
+                        </c:if>
+                        <c:if test="${products.currentPage != i}">
+                            <li><a href="${pageContext.request.contextPath}/index/welcome/${i}/8">${i}</a></li>
+                        </c:if>
+                    </c:forEach>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/index/welcome/${products.currentPage == products.totalPages ? products.currentPage : products.currentPage + 1  }/8">下一页</a>
+                    </li>
+                    <li>共 ${products.totalPages} 页</li>
                 </ul>
             </div>
 
@@ -137,15 +140,10 @@
             <div class="news-list">
                 <h4>新闻动态</h4>
                 <ul>
-                    <li><a href="news-view.html" target="_blank">抢钱啦</a></li>
-                    <li><a href="news-view.html" target="_blank">抢钱啦</a></li>
-                    <li><a href="news-view.html" target="_blank">抢钱啦</a></li>
-                    <li><a href="news-view.html" target="_blank">抢钱啦</a></li>
-                    <li><a href="news-view.html" target="_blank">抢钱啦</a></li>
-                    <li><a href="news-view.html" target="_blank">抢钱啦</a></li>
-                    <li><a href="news-view.html" target="_blank">抢钱啦</a></li>
+                    <c:forEach items="${news}" var="new_msg">
+                        <li><a href="${pageContext.request.contextPath}/news/lists/1/3" target="_blank">${new_msg.enTitle}</a></li>
+                    </c:forEach>
                 </ul>
-
             </div>
         </div>
     </div>

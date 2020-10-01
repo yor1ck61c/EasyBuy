@@ -96,34 +96,36 @@
     </delete>
     <!--改-->
     <update id="updateUserById" parameterType="ebUser">
-        update eb_user set
-        <if test="euUserName != null">
-            EU_USER_NAME = #{euUserName},
-        </if>
-        <if test="euPassword != null">
-            EU_PASSWORD = #{euPassword},
-        </if>
-        <if test="euSex != null">
-            EU_SEX = #{euSex},
-        </if>
-        <if test="euBirthday != null">
-            EU_BIRTHDAY = #{euBirthday},
-        </if>
-        <if test="euIdentityCode != null">
-            EU_IDENTITY_CODE = #{euIdentityCode},
-        </if>
-        <if test="euEmail != null">
-            EU_EMAIL = #{euEmail},
-        </if>
-        <if test="euMobile != null">
-            EU_MOBILE = #{euMobile},
-        </if>
-        <if test="euAddress != null">
-            EU_ADDRESS = #{euAddress},
-        </if>
-        <if test="euStatus != null">
-            EU_STATUS = #{euStatus}
-        </if>
+        update eb_user
+        <set>
+            <if test="euUserName != null">
+                EU_USER_NAME = #{euUserName},
+            </if>
+            <if test="euPassword != null">
+                EU_PASSWORD = #{euPassword},
+            </if>
+            <if test="euSex != null">
+                EU_SEX = #{euSex},
+            </if>
+            <if test="euBirthday != null">
+                EU_BIRTHDAY = #{euBirthday},
+            </if>
+            <if test="euIdentityCode != null">
+                EU_IDENTITY_CODE = #{euIdentityCode},
+            </if>
+            <if test="euEmail != null">
+                EU_EMAIL = #{euEmail},
+            </if>
+            <if test="euMobile != null">
+                EU_MOBILE = #{euMobile},
+            </if>
+            <if test="euAddress != null">
+                EU_ADDRESS = #{euAddress},
+            </if>
+            <if test="euStatus != null">
+                EU_STATUS = #{euStatus}
+            </if>
+        </set>
         where EU_USER_ID = #{euUserId}
 
     </update>

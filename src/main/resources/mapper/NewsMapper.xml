@@ -19,7 +19,7 @@
         insert into eb_news values(null,#{enTitle},#{enContent},#{enCreateTime})
     </insert>
 
-    <update id="update" parameterType="ebNews">
+    <update id="update" parameterType="ebNews">xc
         update eb_news set
         <trim suffixOverrides=",">
             <if test="enTitle != null">

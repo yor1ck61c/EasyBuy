@@ -6,6 +6,14 @@ import java.util.List;
 
 public interface OrderDetailMapper {
 
-    List<EbOrderDetail> findEbOrderDetailByPage();
+    List<EbOrderDetail> findAll();
+
+    EbOrderDetail findOrderDetail();
+
+    void insert(EbOrderDetail orderDetail);
+
+    void update(EbOrderDetail orderDetail);
+
+    void delete(EbOrderDetail orderDetail);
 
 }

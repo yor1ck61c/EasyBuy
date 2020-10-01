@@ -6,6 +6,19 @@ import java.util.List;
 
 public interface ProductCategoryMapper {
 
-    List<EbProductCategory> findProductCategoryByPage();
+    Integer countPC();
 
+    EbProductCategory findProductCategory(EbProductCategory ebProductCategory);
+
+    List<EbProductCategory> findAll();
+
+    void insert(EbProductCategory ebProductCategory);
+
+    void delete(EbProductCategory ebProductCategory);
+
+    void update(EbProductCategory ebProductCategory);
+
+    List<EbProductCategory> findParent();
+
+    List<EbProductCategory> findChild();
 }

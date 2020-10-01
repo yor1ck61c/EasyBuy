@@ -134,6 +134,14 @@
     </update>
 
     <!--查-->
+    <select id="findCPLById" parameterType="int" resultMap="productMap">
+        select <include refid="productColumn"/> from eb_product where epc_id = #{epcId}
+    </select>
+
+    <select id="countProduct" resultType="int">
+        select count(*) from eb_product
+    </select>
+
     <select id="findAll" resultMap="productMap">
         select <include refid="productColumn"/> from eb_product
     </select>

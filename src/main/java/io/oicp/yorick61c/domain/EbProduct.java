@@ -89,6 +89,37 @@ public class EbProduct{
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        EbProduct product = (EbProduct) o;
+
+        if (count != product.count) return false;
+        if (!epId.equals(product.epId)) return false;
+        if (!epName.equals(product.epName)) return false;
+        if (!epDescription.equals(product.epDescription)) return false;
+        if (!epPrice.equals(product.epPrice)) return false;
+        if (!epStock.equals(product.epStock)) return false;
+        if (!epcId.equals(product.epcId)) return false;
+        return epFileName.equals(product.epFileName);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = epId.hashCode();
+        result = 31 * result + epName.hashCode();
+        result = 31 * result + epDescription.hashCode();
+        result = 31 * result + epPrice.hashCode();
+        result = 31 * result + epStock.hashCode();
+        result = 31 * result + epcId.hashCode();
+        result = 31 * result + epcChildId.hashCode();
+        result = 31 * result + epFileName.hashCode();
+        result = 31 * result + count;
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "EbProduct{" +
                 "epId=" + epId +
