@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.layuicdn.com/layui-v2.5.6/css/layui.css">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="layui-container">
+
+    <div class="layui-row">
+
+        <!--左侧导航栏-->
+        <div id="left_nav_bar" class="layui-col-md-3">
+            <ul class="layui-nav layui-nav-tree layui-nav-side" lay-filter="test">
+                <li class="layui-nav-item ">
+                    <a href="javascript:;">快捷菜单</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">选项1</a></dd>
+                        <dd><a href="javascript:;">选项2</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item ">
+                    <a href="javascript:;">健康干预</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">选项1</a></dd>
+                        <dd><a href="javascript:;">选项2</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item ">
+                    <a href="javascript:;">签约建档</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">基本档案</a></dd>
+                        <dd><a href="javascript:;">签约管理</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item ">
+                    <a href="javascript:;">内分泌科</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">选项1</a></dd>
+                        <dd><a href="javascript:;">选项2</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item ">
+                    <a href="javascript:;">心内科</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">选项1</a></dd>
+                        <dd><a href="javascript:;">选项2</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item ">
+                    <a href="javascript:;">体检科</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">选项1</a></dd>
+                        <dd><a href="javascript:;">选项2</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item ">
+                    <a href="javascript:;">健康数据</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">选项1</a></dd>
+                        <dd><a href="javascript:;">选项2</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item ">
+                    <a href="javascript:;">报表管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">选项1</a></dd>
+                        <dd><a href="javascript:;">选项2</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">系统配置</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">医生团队</a></dd>
+                        <dd class="layui-this"><a href="javascript:;">签约服务包</a></dd>
+                        <dd><a href="javascript:;">筛查APP账号</a></dd>
+                        <dd><a href="javascript:;">设备库存管理</a></dd>
+                        <dd><a href="javascript:;">医嘱模板</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+
+        <!--右侧页面主体-->
+        <div style="margin-top: 5px" class="layui-col-lg-9">
+
+            <!--路径导航-->
+            <span style="margin-left: 20px;" class="layui-breadcrumb">
+                <a>系统配置</a>
+                <a><cite>签约服务包</cite></a>
+            </span>
+
+            <div style="border: 1px #9F9F9F solid; margin-left: 10px; margin-top:10px;" class="layui-container">
+
+                <!--条件搜索，添加服务包-->
+                <div class="layui-row">
+                    <form class="layui-form" action="">
+                        <div id="searchPackage" style="margin-top: 5px;" class="layui-form-item">
+                            <div style="margin-top: 5px;" class="layui-inline">
+                                <input v-model="search.PackageName" type="text" lay-verify="required" placeholder="服务包名称" autocomplete="off" class="layui-input">
+                            </div>
+                            <div style="margin-top: 5px;width: 150px" class="layui-inline">
+                                <select v-model="search.PackageLevel" name="servicePackageLevel" lay-verify="">
+                                    <option >服务包等级</option>
+                                </select>
+                            </div>
+                            <button type="button" class="layui-btn layui-btn-warm" @click="checkAlert">搜索</button>
+                            <button type="button" class="layui-btn layui-btn-normal" data-toggle="modal" data-target="#addServicePackage">添加服务包</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!--服务包表格-->
+                <div id="servicePackageTable" class="layui-row">
+                    <table style="text-align: center" class="layui-table">
+                        <colgroup>
+                            <col width="150">
+                            <col width="200">
+                            <col width="150">
+                            <col width="150">
+                            <col width="200">
+                            <col width="150">
+                            <col width="150">
+                            <col width="200">
+                            <col width="150">
+                        </colgroup>
+                        <thead>
+                        <tr >
+                            <th style="text-align: center">操作</th>
+                            <th style="text-align: center">名称</th>
+                            <th style="text-align: center">等级</th>
+                            <th style="text-align: center">适用人群</th>
+                            <th style="text-align: center">说明</th>
+                            <th style="text-align: center">价格（元）</th>
+                            <th style="text-align: center">状态</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="info in servicePackageTableInfo">
+                            <td>
+                                <div class="layui-inline">
+                                    <button type="button" class="layui-btn layui-btn-xs layui-btn-normal">编辑</button>
+                                    <button type="button" class="layui-btn layui-btn-xs layui-btn-normal">删除</button>
+                                </div>
+                            </td>
+                            <td>{{info.txtName}}</td>
+                            <td>{{info.txtLevel}}</td>
+                            <td>{{info.txtSuitablePeople}}</td>
+                            <td>{{info.txtIllustrate}}</td>
+                            <td>{{info.txtPrice}}</td>
+                            <td>{{info.txtStatus}}</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态框 -->
+    <div class="modal fade" id="addServicePackage" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" >
+            <div  class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" >添加服务包</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div  class="modal-body">
+                    <form action="#">
+
+                        <div class="form-group">
+                            <label for="servicePackageName" class="col-form-label">* 服务包名称</label>
+                            <input type="text" v-model="edtServicePackageName" class="form-control" placeholder="" id="servicePackageName">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="servicePackageNum" class="col-form-label">* 服务包编号</label>
+                            <input type="text" v-model="edtServicePackageNum" class="form-control" placeholder="" id="servicePackageNum">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="servicePackageLevel">服务包等级</label>
+                            <select v-model="servicePackageLevel" class="form-control" id="servicePackageLevel">
+                                <option>省级</option>
+                                <option>市级</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="servicePackageType">服务包类型</label>
+                            <select v-model="servicePackageType" class="form-control" id="servicePackageType">
+                                <option>公共卫生服务包</option>
+                                <option>正在使用</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="servicePackageStatus">服务包状态</label>
+                            <select v-model="servicePackageStatus" class="form-control" id="servicePackageStatus">
+                                <option>正常</option>
+                                <option>异常</option>
+                            </select>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="suitableCrowd" class="col-form-label">* 适应人群</label>
+                            <input v-model="edtSuitableCrowd" type="text" class="form-control" placeholder="" id="suitableCrowd">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="servicePackagePrice" class="col-form-label">服务包价格（元）</label>
+                            <input v-model="edtServicePackagePrice" type="text" class="form-control" placeholder="" id="servicePackagePrice">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="servicePackageDiscountedPrice" class="col-form-label">服务包优惠价格</label>
+                            <input v-model="edtServicePackageDiscountedPrice" type="text" class="form-control" placeholder="" id="servicePackageDiscountedPrice">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="serviceIllustration" class="col-form-label">服务说明</label>
+                            <input v-model="edtServiceIllustration" type="text" class="form-control" placeholder="" id="serviceIllustration">
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" @click="save">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!--表格数据-->
+<script>
+    var vm = new Vue({
+        el : '#servicePackageTable',
+        data : {
+            servicePackageTableInfo : [{
+                txtName : "testName",
+                txtLevel : "high",
+                txtSuitablePeople : "all",
+                txtIllustrate : "null",
+                txtPrice : "998",
+                txtStatus : "normal"
+            }, {
+                txtName : "testName",
+                txtLevel : "high",
+                txtSuitablePeople : "all",
+                txtIllustrate : "null",
+                txtPrice : "998",
+                txtStatus : "normal"
+
+            }]
+        }
+    })
+
+
+    var inputVm = new Vue({
+        el : '#addServicePackage',
+        data : {
+
+
+        },
+        methods : {
+            save : function () {
+                var servicePackageInfos = {
+                    edtServicePackageName : this.edtServicePackageName,
+                    edtServicePackageNum : this.edtServicePackageNum,
+                    edtSuitableCrowd : this.edtSuitableCrowd,
+                    servicePackageLevel : this.servicePackageLevel,
+                    servicePackageType : this.servicePackageType,
+                    servicePackageStatus : this.servicePackageStatus,
+                    edtServicePackagePrice : this.edtServicePackagePrice,
+                    edtServicePackageDiscountedPrice : this.edtServicePackageDiscountedPrice,
+                    edtServiceIllustration : this.edtServiceIllustration
+                }
+
+                //处理数据
+                axios.post("test/getData",servicePackageInfos).then(response => {
+                    alert(response.data)
+                })
+
+                /*var test = servicePackageInfos.servicePackageStatus
+                alert(test)*/
+
+            }
+        }
+    })
+
+
+    var searchVm = new Vue({
+        el:'#searchPackage',
+        data: {
+            search:{
+                PackageName : "",
+                PackageLevel : ""
+            },
+
+
+        },
+        mounted : function(){
+          this.getTestData();
+        },
+        methods : {
+            checkAlert : function(){
+
+              alert(this.search.PackageName)
+            },
+
+            getTestData : function () {
+                axios.post("test/getData",{"test":this.search}).then(response => {
+                    this.search = response.data;
+                    alert(this.search.PackageName)
+                })
+            },
+
+            check : function () {
+                axios.post("test/getData",).then(response => {
+                   this.search = response.data;
+                   alert(this.search.PackageName)
+                })
+            }
+        }
+    })
+</script>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script src="https://www.layuicdn.com/layui-v2.5.6/layui.js "></script>
+<script>
+    //一般直接写在一个js文件中
+    layui.use('element', function(){
+        var element = layui.element;
+    });
+    layui.use('form',function () {
+        var form = layui.form;
+    })
+    layui.use('button',function () {
+        var button = layui.button;
+    })
+
+</script>
+<!--<script>
+    $('#left_nav_bar').load("../leftNavBar.html")
+</script>-->
+
+<script>
+    var height = $(window).height();
+    $('#leftNavBar').css("height",height);
+</script>
+</body>
+</html>

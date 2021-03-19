@@ -8,12 +8,11 @@
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 	<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/function-manage.js"></script>
 	<script type="text/javascript">
-		function delProducts(epId) {
-			if (confirm("确认删除此商品?"))
-				location.href= "${pageContext.request.contextPath}/product/delete/" + epId;
-		}
-
-	</script>
+	function delProducts(epId) {
+		if (confirm("确认删除此商品?"))
+			location.href= "${pageContext.request.contextPath}/product/delete/" + epId;
+	}
+</script>
 	<script type="text/javascript">
 		window.onload = function() {
 			var show = document.getElementById("show");

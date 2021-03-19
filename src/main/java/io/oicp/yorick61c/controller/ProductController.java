@@ -106,10 +106,10 @@ public class ProductController {
     }
 
     @RequestMapping("/save")
-    public String saveProduct(@RequestParam("file") MultipartFile file,EbProduct product) throws IOException {
-        String filename = file.getOriginalFilename();
+    public String saveProduct(@RequestParam("file") MultipartFile file/*获取图片文件对象*/,EbProduct product) throws IOException {
+        String filename = file.getOriginalFilename();//获取图片文件名，并保存到image下的product文件夹中。
         file.transferTo(new File("C:\\Users\\ASUS\\IdeaProjects\\EasyBuy\\src\\main\\webapp\\images\\product\\" + filename));
-        product.setEpFileName(filename);
+        product.setEpFileName(filename);//完成对product对象的全部装配,并调用service层中的方法保存商品
         productService.saveProduct(product);
         return "redirect:/product/list/1/3";
     }
@@ -145,9 +145,16 @@ public class ProductController {
 
     @RequestMapping("/update/{epId}")
     public String updateProduct(@RequestParam("file") MultipartFile file,EbProduct product,@PathVariable Integer epId) throws IOException {
-        String filename = file.getOriginalFilename();
-        file.transferTo(new File("C:\\Users\\ASUS\\IdeaProjects\\EasyBuy\\src\\main\\webapp\\images\\product\\" + filename));
-        product.setEpFileName(filename);
+        /*
+        * 获取新上传的商品文件,如果有就修改。
+        * 同时根据id修改指定商品
+        * 修改后跳回商品列表页面
+        * */
+        if (file != null){
+            String filename = file.getOriginalFilename();
+            file.transferTo(new File("C:\\Users\\ASUS\\IdeaProjects\\EasyBuy\\src\\main\\webapp\\images\\product\\" + filename));
+            product.setEpFileName(filename);
+        }
         product.setEpId(epId);
         productService.updateProduct(product);
         return "redirect:/product/list/1/3";

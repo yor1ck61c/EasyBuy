@@ -1,0 +1,556 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>quickServeNav</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+
+</head>
+
+<body>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#quickServeNav">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="quickServeNav" tabindex="-1" role="dialog" aria-labelledby="quickServeNav" aria-hidden="true">
+    <div class="modal-dialog modal-xl" style="pointer-events: none">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="quickServeNavTitle">快捷服务导航</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row" style="border: #9F9F9F solid 1px; text-align: center">
+                        <div style="width: 100%;margin-top: 10px;margin-bottom: 10px">身份证信息</div>
+                    </div>
+                    <div class="row" style="border: #9F9F9F solid 1px; margin-top: 5px;">
+                        <div class="col-3">
+                            <img style="width: 200px;height: 200px; margin-top: 7px">
+                        </div>
+                        <div class="col-8">
+                            <div class="container" style="margin-top: 20px; margin-left: 10px">
+                                <div class="row">
+
+                                    <div class="col-6">
+
+                                        证件类型：身份证
+                                        <hr>
+                                    </div>
+                                    <div class="col-6">
+                                        证件号码：130984200006010616
+                                        <hr>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        姓名：
+                                        <hr>
+                                    </div>
+                                    <div class="col-6">
+                                        性别：
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        年龄：16
+                                        <hr>
+                                    </div>
+                                    <div class="col-6">
+                                        住址：河北省沧州市新华区解放东路开元小区
+                                        <hr>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" style="margin-left: 190px">档案状态：未建档</a>
+
+
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 30px">
+                        <div>
+                            <p>请点击相应的服务按钮进入该项服务</p>
+                            <p>档案管理</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div style="width: 100%">
+                            <hr>
+                            <button id="residentSignBtn" class="btn btn-outline-primary btn-sm">居民建档</button>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+
+<div class="modal fade" id="residentSign" tabindex="-1" role="dialog" aria-labelledby="residentSign" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="residentSignTitle">居民建档</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div style="width: 100%;margin-top: 10px;margin-bottom: 10px;text-align: center; font-size: 24px">个人基本信息表</div>
+                        <div style="width: 100%;margin-top: 10px;margin-bottom: 10px;">
+                            <span style="margin-left: 10px"> * 姓名:</span>
+                            <span>
+                                    <input v-model="CPatientDto.PatientName">
+                                </span>
+                            <span style="float: right;margin-right: 10px;">
+                                    编号：
+                                    <input v-model="CPatientDto.PatientID">
+                                </span>
+                        </div>
+                    </div>
+                    <div class="row" style="font-size: 16px; text-align: center">
+                        <table width="100%" border="1">
+                            <tbody>
+                            <tr>
+                                <td width="10%">&nbsp;*身份证号</td>
+                                <td><input v-model="CPatientDto.IDCard" type="text" style="width: 100%"></td>
+                                <td width="10%">&nbsp;*性别</td>
+                                <td>
+                                    <input name="Gender" type="radio" value="unknownGender" id="unknown" v-model="CPatientDto.Gender">
+                                    <label for="unknown">0 未知的性别</label>
+                                    <input name="Gender" type="radio" value="male" id="male" v-model="CPatientDto.Gender">
+                                    <label for="male">1 男性</label>
+                                    <input name="Gender" type="radio" value="female" id="female" v-model="CPatientDto.Gender">
+                                    <label for="female">2 女性</label>
+                                    <input name="Gender" type="radio" value="unDescribe" id="unDescribe" v-model="CPatientDto.Gender">
+                                    <label for="unDescribe">9 未说明的性别</label>
+                                    <span style="float: right;margin-right: 5px"></span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <table width="100%" border="1">
+                            <tbody>
+                            <tr>
+                                <td width="10%">&nbsp;*出生日期</td>
+                                <td><input v-model="CPatientDto.Birthday" type="date" style="width: 100%"></td>
+                                <td width="10%">&nbsp;*常住类型</td>
+                                <td>
+                                    <div>
+                                        <input name="Nationality" type="radio" value="户籍" id="registered">
+                                        <label for="registered">1 户籍</label>
+                                        <input name="Nationality" type="radio" value="非户籍" id="unRegistered">
+                                        <label for="unRegistered">2 非户籍</label>
+                                    </div>
+
+                                </td>
+                                <td width="10%">&nbsp;民族</td>
+                                <td>
+                                    <select v-model="CPatientDto.Nationality" style="width: 100%;">
+                                        <option>汉族</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;*本人电话</td>
+                                <td><input v-model="CPatientDto.PhoneNumber" style="width: 100%"></td>
+                                <td>&nbsp;联系人姓名</td>
+                                <td><input v-model="CPatientDto.EmergencyContact" style="width: 100%"></td>
+                                <td>&nbsp;联系人电话</td>
+                                <td><input v-model="CPatientDto.EmergencyPhoneNumber" style="width: 100%"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <table width="100%" border="1">
+                            <tbody>
+                            <tr>
+                                <td width="10%">&nbsp;户籍地址</td>
+                                <td>
+                                    <input v-model="CPatientDto.ResidenceAddress" style="width: 100%">
+                                </td>
+                                <td width="10%">&nbsp;现住址</td>
+                                <td>
+                                    <input v-model="CPatientDto.CurrentAddress" style="width: 100%">
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <table width="100%" border="1">
+                            <tbody>
+                            <tr>
+                                <td width="10%">&nbsp;血型</td>
+                                <td>
+                                    <input name="BloodType" id="AType" value="A" type="radio" v-model="CPatientDto.BloodType">
+                                    <label for="AType">1.A型</label>
+                                    <input name="BloodType" id="BType" value="B" type="radio" v-model="CPatientDto.BloodType">
+                                    <label for="BType">2.B型</label>
+                                    <input name="BloodType" id="OType" value="O" type="radio" v-model="CPatientDto.BloodType">
+                                    <label for="OType">3.O型</label>
+                                    <input name="BloodType" id="ABType" value="AB" type="radio" v-model="CPatientDto.BloodType">
+                                    <label for="ABType">4.AB型</label>
+                                    <input name="BloodType" id="unknownType" value="unknownType" type="radio" v-model="CPatientDto.BloodType">
+                                    <label for="unknownType">5.不详</label>
+
+                                    <span style="margin-left: 10px;margin-right: 10px">/</span>
+
+                                    <span>RH:</span>
+                                    <input name="RH_Type" id="positive" value="阳性" type="radio" v-model="CPatientDto.RH_Type">
+                                    <label for="positive">1.阳性</label>
+                                    <input name="RH_Type" id="negative" value="阴性" type="radio" v-model="CPatientDto.RH_Type">
+                                    <label for="negative">2.阴性</label>
+                                    <input name="RH_Type" id="unknownRH_Type" value="不详" type="radio" v-model="CPatientDto.RH_Type">
+                                    <label for="unknownRH_Type">3.不详</label>
+
+                                    <span style="float: right; margin-right: 5px"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;婚姻状况</td>
+                                <td>
+                                    <input name="married" id="unMarried" type="radio" value="未婚" v-model="CPatientDto.Marriage">
+                                    <label for="unMarried">1.未婚</label>
+                                    <input name="married" id="Married" type="radio" value="已婚" v-model="CPatientDto.Marriage">
+                                    <label for="Married">2.已婚</label>
+                                    <input name="married" id="lostCompanion" type="radio" value="丧偶" v-model="CPatientDto.Marriage">
+                                    <label for="lostCompanion">3.丧偶</label>
+                                    <input name="married" id="divorce" type="radio" value="离婚" v-model="CPatientDto.Marriage">
+                                    <label for="divorce">4.离婚</label>
+                                    <input name="married" id="unDescribeMarriage" type="radio" value="未说明的婚姻状况" v-model="CPatientDto.Marriage">
+                                    <label for="unDescribeMarriage">5.未说明的婚姻状况</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;文化程度</td>
+                                <td>
+                                    <input type="radio" name="EducationLevel" id="postgraduate" value="研究生" v-model="CPatientDto.EducationLevel">
+                                    <label for="postgraduate">1.研究生</label>
+                                    <input type="radio" name="EducationLevel" id="college" value="大学本科" v-model="CPatientDto.EducationLevel">
+                                    <label for="college">2.大学本科</label>
+                                    <input type="radio" name="EducationLevel" id="JuniorCollege" value="大学专科和专科院校" v-model="CPatientDto.EducationLevel">
+                                    <label for="JuniorCollege">3.大学专科和专科院校</label>
+                                    <input type="radio" name="EducationLevel" id="Technical secondary school" value="中等专业学校" v-model="CPatientDto.EducationLevel">
+                                    <label for="Technical secondary school">4.中等专业学校</label>
+                                    <input type="radio" name="EducationLevel" id="Technical school" value="技工学校" v-model="CPatientDto.EducationLevel">
+                                    <label for="Technical school">5.技工学校</label>
+                                    <input type="radio" name="EducationLevel" id="highSchool" value="高中" v-model="CPatientDto.EducationLevel">
+                                    <label for="highSchool">6.高中</label>
+                                    <input type="radio" name="EducationLevel" id="junior middle school" value="初中" v-model="CPatientDto.EducationLevel">
+                                    <label for="junior middle school">7.初中</label>
+                                    <input type="radio" name="EducationLevel" id="primarySchool" value="小学" v-model="CPatientDto.EducationLevel">
+                                    <label for="primarySchool">8.小学</label>
+                                    <input type="radio" name="EducationLevel" id="illiteracy" value="文盲和半文盲" v-model="CPatientDto.EducationLevel">
+                                    <label for="illiteracy">9.文盲和半文盲</label><br>
+                                    <input type="radio" name="EducationLevel" id="unknownEducationLevel" value="不详" v-model="CPatientDto.EducationLevel">
+                                    <label for="unknownEducationLevel">10.不详</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;职业</td>
+                                <td>
+                                    <input type="radio" name="Profession" id="p0" value="国家机关、党群组织、企业、事业单位负责人" v-model="CPatientDto.Profession">
+                                    <label for="p0">0.国家机关、党群组织、企业、事业单位负责人</label>
+                                    <input type="radio" name="Profession" id="p1" value="专业技术人员" v-model="CPatientDto.Profession">
+                                    <label for="p1">1.专业技术人员</label>
+                                    <input type="radio" name="Profession" id="p2" value="办事人员和有关人员" v-model="CPatientDto.Profession">
+                                    <label for="p2">2.办事人员和有关人员</label>
+                                    <input type="radio" name="Profession" id="p3" value="商业、服务业人员" v-model="CPatientDto.Profession">
+                                    <label for="p3">3.商业、服务业人员</label><br>
+                                    <input type="radio" name="Profession" id="p4" value="农、林、牧、渔、水利业生产人员" v-model="CPatientDto.Profession">
+                                    <label for="p4">4.农、林、牧、渔、水利业生产人员</label>
+                                    <input type="radio" name="Profession" id="p5" value="生产、运输设备操作人员及有关人员" v-model="CPatientDto.Profession">
+                                    <label for="p5">5.生产、运输设备操作人员及有关人员</label>
+                                    <input type="radio" name="Profession" id="p6" value="军人" v-model="CPatientDto.Profession">
+                                    <label for="p6">6.军人</label>
+                                    <input type="radio" name="Profession" id="p7" value="不便分类的其他从业人员" v-model="CPatientDto.Profession">
+                                    <label for="p7">7.不便分类的其他从业人员</label>
+                                    <input type="radio" name="Profession" id="p8" value="无职业" v-model="CPatientDto.Profession">
+                                    <label for="p8">8.无职业</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    医疗费用<br>
+                                    支付方式
+                                </td>
+                                <td>
+                                    <input type="radio" name="PayWay" id="pw1" value="城镇职工基本医疗保险" v-model="CPatientDto.PayWay">
+                                    <label for="pw1">1.城镇职工基本医疗保险</label>
+                                    <input type="radio" name="PayWay" id="pw2" value="城镇居民基本医疗保险" v-model="CPatientDto.PayWay">
+                                    <label for="pw2">2.城镇居民基本医疗保险</label>
+                                    <input type="radio" name="PayWay" id="pw3" value="新型农村合作医疗" v-model="CPatientDto.PayWay">
+                                    <label for="pw3">3.新型农村合作医疗</label>
+                                    <input type="radio" name="PayWay" id="pw4" value="贫困救助" v-model="CPatientDto.PayWay">
+                                    <label for="pw4">4.贫困救助</label>
+                                    <input type="radio" name="PayWay" id="pw5" value="商业医疗保险" v-model="CPatientDto.PayWay">
+                                    <label for="pw5">5.商业医疗保险</label>
+                                    <input type="radio" name="PayWay" id="pw6" value="全公费" v-model="CPatientDto.PayWay">
+                                    <label for="pw6">6.全公费</label>
+                                    <input type="radio" name="PayWay" id="pw7" value="全自费" v-model="CPatientDto.PayWay">
+                                    <label for="pw7">7.全自费</label>
+                                    <input name="PayWay" id="pw8" v-model="CPatientDto.PayWay">
+                                    <label for="pw8">8.其他</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;药物过敏史</td>
+                                <td>
+                                    <span>0.无</span>
+                                    <span style="margin-left: 10px">101.青霉素类抗生素</span>
+                                    <span style="margin-left: 10px">102.磺胺类抗生素</span>
+                                    <span style="margin-left: 10px">103.头孢类抗生素</span>
+                                    <span style="margin-left: 10px">104.含碘药品</span>
+                                    <span style="margin-left: 10px">105.酒精</span>
+                                    <span style="margin-left: 10px">106.镇静麻醉剂</span><br>
+                                    <span style="margin-left: 10px">
+                                                199.其他药物过敏源
+                                                <input style="margin-left: 5px">
+                                            </span>
+                                    <span style="margin-left: 10px">1.猪肉</span>
+                                    <span style="margin-left: 10px">2.羊肉</span>
+                                    <span style="margin-left: 10px">3.牛肉</span>
+                                    <span style="margin-left: 10px">4.牛奶</span>
+                                    <span style="margin-left: 10px">5.蛋及蛋制品</span>
+                                    <span style="margin-left: 10px">6.鸡、鸭等禽类食品</span><br>
+                                    <span style="margin-left: 10px">7.鱼、虾等水产类食品</span>
+                                    <span style="margin-left: 10px">8.水果（包括带壳的果仁）</span>
+                                    <span style="margin-left: 10px">
+                                                299.其他食物过敏源
+                                                <input style="margin-left: 5px">
+                                            </span><br>
+                                    <span style="margin-left: 10px">301.植物花粉</span>
+                                    <span style="margin-left: 10px">302.动物毛发</span>
+                                    <span style="margin-left: 10px">303.空气粉尘</span>
+                                    <span style="margin-left: 10px;">
+                                                399.其他环境过敏源
+                                                <input style="margin-left: 5px">
+                                            </span><br>
+                                    <span style="margin-left: 10px">
+                                                4.混合型过敏原
+                                                <input style="margin-left: 5px">
+                                            </span>
+                                    <span style="margin-left: 10px">
+                                                9.其他过敏原
+                                                <input style="margin-left: 5px">
+                                            </span>
+                                    <span style="float: right; margin-right: 5px;">
+                                                <input id="allergic" style="width: 30px; ">
+                                            </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;暴露史</td>
+                                <td>
+                                    <span>1.无</span>
+                                    <span style="margin-left: 10px">2.化学品</span>
+                                    <span style="margin-left: 10px">3.毒物</span>
+                                    <span style="margin-left: 10px">4.射线</span>
+                                    <span style="float: right; margin-right: 5px;">
+
+                                                <input id="expose" style="width: 30px; ">
+                                            </span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <table width="10%" border="1">
+                            <tbody>
+                            <tr>
+                                <td height="150px">&nbsp;既往史</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <table width="90%" border="1">
+                            <tbody>
+                            <tr>
+                                <td width="10%">&nbsp;疾病</td>
+                                <td>
+                                    <span>1.无</span>
+                                    <span style="margin-left: 10px">2.高血压</span>
+                                    <span style="margin-left: 10px">3.糖尿病</span>
+                                    <span style="margin-left: 10px">4.冠心病</span>
+                                    <span style="margin-left: 10px">5.慢性阻塞性肺疾病</span>
+                                    <span style="margin-left: 10px">6.恶性肿瘤</span>
+                                    <span style="margin-left: 10px">7.脑卒中</span>
+                                    <span style="margin-left: 10px">8.严重精神障碍</span>
+                                    <span style="margin-left: 10px">9.结核病</span>
+                                    <span style="margin-left: 10px">10.肝炎</span>
+                                    <span style="margin-left: 10px"><br>11.其他法定传染病</span>
+                                    <span style="margin-left: 10px">12.职业病</span>
+                                    <span style="margin-left: 10px">13.其他</span>
+                                    <span style="float: right; margin-right: 5px;">
+                                                <input id="disease1" style="width: 30px; "> / <input id="disease2" style="width: 30px; "> /
+                                                <input id="disease3" style="width: 30px; ">
+                                            </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;手术</td>
+                                <td>
+                                    <span>1.无</span>
+                                    <span style="margin-left: 10px">2.有</span>
+                                    <span style="float: right; margin-right: 5px;">
+                                                <input id="operation" style="width: 30px; ">
+                                            </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;外伤</td>
+                                <td>
+                                    <span>1.无</span>
+                                    <span style="margin-left: 10px">2.有</span>
+                                    <span style="float: right; margin-right: 5px;">
+                                                <input id="wound" style="width: 30px; ">
+                                            </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;输血</td>
+                                <td>
+                                    <span>1.无</span>
+                                    <span style="margin-left: 10px">2.有</span>
+                                    <span style="float: right; margin-right: 5px;">
+                                                <input id="blood_in" style="width: 30px; ">
+                                            </span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <table width="100%" border="1">
+                            <tbody>
+                            <tr>
+                                <td width="10%">&nbsp;家族史</td>
+                                <td>
+                                    <span>1.无</span>
+                                    <span style="margin-left: 10px">2.高血压</span>
+                                    <span style="margin-left: 10px">3.糖尿病</span>
+                                    <span style="margin-left: 10px">4.冠心病</span>
+                                    <span style="margin-left: 10px">5.慢性阻塞性肺疾病</span>
+                                    <span style="margin-left: 10px">6.恶性肿瘤</span>
+                                    <span style="margin-left: 10px">7.脑卒中</span>
+                                    <span style="margin-left: 10px">8.严重精神障碍</span>
+                                    <span style="margin-left: 10px">9.结核病</span>
+                                    <span style="margin-left: 10px">10.肝炎</span>
+                                    <span style="margin-left: 10px">11.其他法定传染病</span><br>
+                                    <span style="margin-left: 10px">12.职业病</span>
+                                    <span style="margin-left: 10px">13.其他</span><br>
+                                    <span>
+                                                父亲：
+                                                <input id="father_disease1" style="width: 30px; ">
+                                                /
+                                                <input id="father_disease2" style="width: 30px; ">
+                                            </span>
+                                    <span style="margin-left: 20px">
+                                                母亲：
+                                                <input id="mother_disease1" style="width: 30px; ">
+                                                /
+                                                <input id="mother_disease2" style="width: 30px; ">
+                                            </span>
+                                    <span style="margin-left: 20px">
+                                                子女：
+                                                <input id="children_disease1" style="width: 30px; ">
+                                                /
+                                                <input id="children_disease2" style="width: 30px; ">
+                                            </span>
+                                    <span style="margin-left: 20px">
+                                                兄弟姐妹：
+                                                <input id="brother_disease1" style="width: 30px; ">
+                                                /
+                                                <input id="brother_disease2" style="width: 30px; ">
+                                            </span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" @click="save">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+</script>
+<script>
+    var infoVm = new Vue({
+        el: '#residentSign',
+        data: {
+            CPatientDto: {
+                PatientName: "1",
+                PatientID: "1",
+                IDCard: "1",
+                Gender: "1",
+                Birthday: "1",
+                Nationality: "1",
+                Marriage: "1",
+                PhoneNumber: "1",
+                EmergencyContact: "1",
+                EmergencyPhoneNumber: "1",
+                EducationLevel: "1",
+                Profession: "1",
+                PayWay: "1",
+            }
+        },
+        methods: {
+
+            save: function () {
+
+                /*$.ajax({
+                    type: "post",
+                    url: "test/getData",
+                    dataType: 'json',
+                    contentType:"application/json",
+                    data: '{"dto":' + JSON.stringify(this.CPatientDto)+'}',
+
+                    //  ata: { "name": name }, //Get方式时的json格式数据参数方式
+                    // data:'{"name":"'+name+'"}',//Post方式时的json格式参数，get方式访问时，代码不会报错，但是不会返回任何数据
+
+                    success: function (data) {
+                        alert("success");
+                        alert(data);
+                    }})*/
+                var dto = { "PatientID": "张学友", "PatientName": "中国香港" };
+                axios({
+                    method: 'post',
+                    url: 'test/getData',
+                    data: '{"dto":' + JSON.stringify(dto) + '}'
+                })
+            }
+        }
+
+    })
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script>
+    $('#residentSignBtn').click(function () {
+        $('#quickServeNav').modal('hide');
+        $('#residentSign').modal('show');
+    })
+
+
+</script>
+<!-- JS, Popper.js, and jQuery -->
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>

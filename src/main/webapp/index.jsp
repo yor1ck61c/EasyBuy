@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--导入JSTL标签库--%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -12,8 +13,8 @@
 <body >
 <div id="header" class="wrap">
     <div id="logo" style="margin-right: 50px"><img style="width: 150px;height: 50px" src="${pageContext.request.contextPath}/images/logo.gif" /></div>
-    <div class="help"><a href="${pageContext.request.contextPath}/shopping.jsp" class="shopping">购物车</a>
-        <c:if test="${sessionScope.user == null}" >
+    <div class="help"><a href="${pageContext.request.contextPath}/shopping.jsp" class="shopping">购物车</a> <%--跳转至购物车--%>
+        <c:if test="${sessionScope.user == null}" ><%--登录成功改变状态栏，并根据用户身份信息开放进入后台的权限--%>
             <a href="${pageContext.request.contextPath}/login.jsp">登录</a>
             <a href="${pageContext.request.contextPath}/register.jsp">注册</a>
         </c:if>
@@ -28,12 +29,12 @@
                 <a href="${pageContext.request.contextPath}/user/quit">退出登录</a>
             </c:if>
         </c:if>
-        <a href="${pageContext.request.contextPath}/comment/u_list/1/5">留言</a>
+        <a href="${pageContext.request.contextPath}/comment/u_list/1/5">留言</a><%--进入留言板--%>
     </div>
     <div class="navbar">
         <ul class="clearfix">
-            <li class="current"><a href="${pageContext.request.contextPath}/index/welcome/1/8">首页</a></li>
-            <c:forEach items="${sessionScope.parent}" var="pcp" >
+            <li class="current"><a href="${pageContext.request.contextPath}/index/welcome/1/8">首页</a></li><%--返回首页连接--%>
+            <c:forEach items="${sessionScope.parent}" var="pcp" ><%--展示父分类--%>
                 <li><a href="${pageContext.request.contextPath}/product/getChildProductList/${pcp.epcId}">${pcp.epcName}</a></li>
             </c:forEach>
         </ul>
@@ -41,24 +42,13 @@
 </div>
 <div id="childNav">
     <div class="wrap">
-        <%--<ul class="clearfix">
-            <c:forEach items="${sessionScope.child}" var="pcc" varStatus="status" begin="1" end="4">
-                <c:if test="${status.index + 1} == 1">
-                    <li class="first"><a href="#">${pcc.epcName}</a></li>
-                </c:if>
-                <c:if test="${status.index + 1} == 4">
-                    <li class="last"><a href="#">${pcc.epcName}</a></li>
-                </c:if>
-            </c:forEach>
-        </ul>--%>
-        <form method="post" action="#">
+        <form method="post" action="${pageContext.request.contextPath}/product/search"><%--搜索指定商品--%>
             <div style="margin-top: 3px;float: right; color: gainsboro">
                 <label>
                    想买点啥：<input type="text" name="epName" style="color: black" placeholder="输入你想要购买的商品..."/>
                 </label>
                 <input type="button" value="搜索"/>
             </div>
-
         </form>
     </div>
 </div>
@@ -67,6 +57,10 @@
         <div class="box">
             <h2>商品分类</h2>
             <c:forEach items="${sessionScope.parent}" var="pcp">
+                <%--
+                二重循环展示商品的父分类以及下面的子分类，pcp为父类，pcc为子类
+                并附带跳转功能，点击可链接到指定商品
+                --%>
                 <dl>
                     <dt>${pcp.epcName}</dt>
                     <c:forEach items="${sessionScope.child}" var="pcc">
@@ -83,6 +77,10 @@
         <div class="last-view">
             <h2>最近浏览</h2>
             <dl class="clearfix">
+                <%--
+                最近浏览功能模块
+                附带跳转功能，点击可链接到指定商品
+                --%>
                 <c:forEach items="${sessionScope.recentView}" var="item">
                     <dt><img src="${pageContext.request.contextPath}/images/product/${item.epFileName}" /></dt>
                     <dd><a href="${pageContext.request.contextPath}/product/view/${item.epId}">${item.epName}</a></dd>
@@ -94,6 +92,10 @@
         <div class="price-off">
             <h2>商品列表</h2>
             <ul class="product clearfix">
+                <%--
+                商品展示部分
+                附带跳转功能，点击可链接到指定商品
+                --%>
                 <c:forEach items="${products.items}" var="product">
                     <li>
                         <dl>
@@ -113,7 +115,12 @@
 
                 
             </ul>
-
+            <%--
+            页码显示部分
+            默认每页显示8个商品，从第一页开始展示，当前页特殊显示
+            可根据页码，或超链接跳转至其他页面
+            并显示总页数
+            --%>
             <div class="pager">
                 <ul class="clearfix">
                     <li>
@@ -140,6 +147,7 @@
             <div class="news-list">
                 <h4>新闻动态</h4>
                 <ul>
+                    <%--所有新闻展示，并附带跳转至特定新闻功能--%>
                     <c:forEach items="${news}" var="new_msg">
                         <li><a href="${pageContext.request.contextPath}/news/lists/1/3" target="_blank">${new_msg.enTitle}</a></li>
                     </c:forEach>

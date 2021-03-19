@@ -22,7 +22,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public PageBean<EbProduct> findProductByPage(Integer currentPage, Integer row) {
-
         PageBean<EbProduct> ebProductPageBean = new PageBean<>();
         ebProductPageBean.setCurrentPage(currentPage);
         ebProductPageBean.setRows(row);
@@ -39,7 +38,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteProduct(Integer epId) {
         EbProduct product = new EbProduct();
-        product.setEpId(epId);
+        product.setEpId(epId);//根据id删除指定商品
         productMapper.delete(product);
     }
 

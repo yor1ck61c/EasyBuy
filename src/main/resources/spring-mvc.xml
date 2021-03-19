@@ -31,6 +31,7 @@
 
     <mvc:interceptors>
         <mvc:interceptor>
+            <!--配置需要拦截的资源-->
             <mvc:mapping path="/**"/>
             <!--配置不拦截的资源-->
             <mvc:exclude-mapping path="/jump_to_index.jsp"/>
@@ -39,6 +40,7 @@
             <mvc:exclude-mapping path="/index.jsp"/>
             <mvc:exclude-mapping path="/register.jsp"/>
             <mvc:exclude-mapping path="/reg-result.jsp"/>
+            <!--配置拦截方法类的全限定名-->
             <bean class="io.oicp.yorick61c.interceptor.CheckLoginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
